@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="36" fill="#ffffff"/>
+  <rect x="24" y="24" width="464" height="464" rx="28" stroke="#201A17" stroke-width="12"/>
+  <rect x="58" y="58" width="118" height="118" fill="#201A17"/>
+  <rect x="82" y="82" width="70" height="70" fill="#ffffff"/>
+  <rect x="106" y="106" width="22" height="22" fill="#201A17"/>
+  <rect x="336" y="58" width="118" height="118" fill="#201A17"/>
+  <rect x="360" y="82" width="70" height="70" fill="#ffffff"/>
+  <rect x="384" y="106" width="22" height="22" fill="#201A17"/>
+  <rect x="58" y="336" width="118" height="118" fill="#201A17"/>
+  <rect x="82" y="360" width="70" height="70" fill="#ffffff"/>
+  <rect x="106" y="384" width="22" height="22" fill="#201A17"/>
+  <rect x="226" y="70" width="24" height="24" fill="#201A17"/>
+  <rect x="274" y="70" width="24" height="24" fill="#201A17"/>
+  <rect x="226" y="118" width="24" height="24" fill="#201A17"/>
+  <rect x="250" y="142" width="24" height="24" fill="#201A17"/>
+  <rect x="298" y="142" width="24" height="24" fill="#201A17"/>
+  <rect x="202" y="190" width="24" height="24" fill="#201A17"/>
+  <rect x="250" y="190" width="24" height="24" fill="#201A17"/>
+  <rect x="322" y="190" width="24" height="24" fill="#201A17"/>
+  <rect x="370" y="190" width="24" height="24" fill="#201A17"/>
+  <rect x="226" y="238" width="24" height="24" fill="#201A17"/>
+  <rect x="274" y="238" width="24" height="24" fill="#201A17"/>
+  <rect x="322" y="238" width="24" height="24" fill="#201A17"/>
+  <rect x="202" y="286" width="24" height="24" fill="#201A17"/>
+  <rect x="250" y="286" width="24" height="24" fill="#201A17"/>
+  <rect x="346" y="286" width="24" height="24" fill="#201A17"/>
+  <rect x="394" y="286" width="24" height="24" fill="#201A17"/>
+  <rect x="202" y="334" width="24" height="24" fill="#201A17"/>
+  <rect x="250" y="334" width="24" height="24" fill="#201A17"/>
+  <rect x="298" y="334" width="24" height="24" fill="#201A17"/>
+  <rect x="346" y="334" width="24" height="24" fill="#201A17"/>
+  <rect x="394" y="334" width="24" height="24" fill="#201A17"/>
+  <rect x="202" y="382" width="24" height="24" fill="#201A17"/>
+  <rect x="250" y="382" width="24" height="24" fill="#201A17"/>
+  <rect x="298" y="382" width="24" height="24" fill="#201A17"/>
+  <rect x="346" y="382" width="24" height="24" fill="#201A17"/>
+  <text x="256" y="476" text-anchor="middle" fill="#9C2D1C" font-size="24" font-family="Arial, sans-serif" letter-spacing="2">CONTACT QR</text>
+</svg>

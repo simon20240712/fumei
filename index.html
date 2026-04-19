@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>福美株式会社 | 品牌官网</title>
+  <style>
+    :root{
+      --bg:#f3ede5;
+      --bg-soft:#ede5db;
+      --panel:rgba(255,255,255,.34);
+      --panel-2:rgba(255,250,244,.50);
+      --line:rgba(103,81,56,.14);
+      --line-soft:rgba(103,81,56,.08);
+      --text:#231c17;
+      --muted:#6d6054;
+      --muter:#9a8b7b;
+      --brand:#b9965d;
+      --brand-soft:rgba(185,150,93,.14);
+      --max:1280px;
+      --radius:28px;
+      --shadow:0 24px 80px rgba(103,81,56,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 12% 0%, rgba(255,255,255,.72), transparent 26%),radial-gradient(circle at 100% 10%, rgba(185,150,93,.16), transparent 22%),radial-gradient(circle at 82% 28%, rgba(255,244,228,.86), transparent 18%),linear-gradient(180deg, #f8f3ec 0%, #f1e9df 52%, #ebe1d5 100%);color:var(--text);font-family:Inter,"PingFang SC","Hiragino Sans GB","Microsoft YaHei UI","Noto Sans SC","Yu Gothic",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    button,input,textarea{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+
+    .topbar{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(248,243,236,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line-soft);box-shadow:0 8px 30px rgba(103,81,56,.06)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand-mark{width:42px;height:42px;border:1px solid var(--line);border-radius:14px;padding:7px;background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,249,242,.26));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+    .brand-copy{display:flex;flex-direction:column;line-height:1.1}
+    .brand-copy strong{font-size:14px;letter-spacing:.04em}
+    .brand-copy span{font-size:12px;color:var(--muter)}
+    .nav-actions{display:flex;align-items:center;gap:12px}
+    .nav-links{display:flex;align-items:center;gap:12px}
+    .nav-links a,.lang-btn,.ghost-btn{height:42px;padding:0 16px;border:1px solid var(--line);border-radius:999px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.24);transition:.28s ease}
+    .nav-links a:hover,.lang-btn:hover,.ghost-btn:hover{color:var(--text);border-color:rgba(255,255,255,.20);transform:translateY(-1px)}
+    .lang-switch{display:flex;gap:8px}
+    [data-lang="zh"] .lang-btn[data-l="zh"],[data-lang="ja"] .lang-btn[data-l="ja"]{background:var(--text);color:#fff;border-color:var(--text)}
+
+    .hero{padding:150px 0 54px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) 320px;gap:30px;align-items:end}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.03)}
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 18px var(--brand)}
+    .hero h1{margin:22px 0 18px;font-size:clamp(54px,10.5vw,132px);line-height:.92;letter-spacing:-.07em;font-weight:800;max-width:10ch}
+    .hero p{max-width:760px;font-size:clamp(16px,2vw,21px);line-height:1.85;color:var(--muted);margin:0}
+    .hero-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+    .btn{height:54px;padding:0 22px;border-radius:999px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:12px;transition:.28s ease;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(135deg, #c7a671, #b08a52);color:#fff;border-color:rgba(185,150,93,.55)}
+    .btn-secondary{background:rgba(255,255,255,.34);color:var(--text)}
+    .btn .arrow{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:rgba(255,255,255,.24)}
+    .hero-side{padding:26px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg, rgba(255,255,255,.58), rgba(252,246,238,.34));box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:310px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    .hero-side::before{content:"";position:absolute;inset:auto -40px -70px auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle, rgba(212,255,63,.32), transparent 68%);filter:blur(10px)}
+    .side-label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muter)}
+    .side-big{margin-top:18px;font-size:52px;line-height:.94;font-weight:800;letter-spacing:-.06em}
+    .side-list{margin-top:22px;display:grid;gap:10px}
+    .side-chip{padding:12px 14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.34);font-size:13px;color:var(--muted)}
+
+    .ticker{padding:20px 0 34px;border-bottom:1px solid var(--line-soft);overflow:hidden}
+    .ticker-track{display:flex;gap:16px;min-width:max-content;animation:marquee 26s linear infinite}
+    .ticker-item{padding:12px 18px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.34);font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .section{padding:86px 0;border-bottom:1px solid var(--line-soft)}
+    .section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:30px}
+    .section-kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muter);margin-bottom:10px}
+    .section-title{font-size:clamp(34px,5vw,76px);letter-spacing:-.06em;line-height:.96;font-weight:800;margin:0;max-width:10ch}
+    .section-lead{max-width:520px;color:var(--muted);font-size:16px;line-height:1.9}
+
+    .cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .case{position:relative;min-height:360px;padding:24px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,249,242,.26));overflow:hidden;transition:transform .4s ease,border-color .4s ease,background .4s ease}
+    .case:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.24);background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03))}
+    .case::before{content:"";position:absolute;inset:auto -80px -80px auto;width:260px;height:260px;border-radius:50%;background:var(--caseGlow, radial-gradient(circle, rgba(212,255,63,.30), transparent 65%));filter:blur(6px);opacity:.8;transition:transform .4s ease}
+    .case:hover::before{transform:scale(1.08)}
+    .case-top{display:flex;justify-content:space-between;gap:20px;align-items:start;position:relative;z-index:1}
+    .case-index{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muter)}
+    .case-arrow{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:20px;color:var(--muted);transition:.28s ease;background:rgba(255,255,255,.03)}
+    .case:hover .case-arrow{transform:translate(4px,-4px);background:linear-gradient(135deg, #c7a671, #b08a52);color:#fff;border-color:rgba(185,150,93,.45)}
+    .case-body{position:absolute;left:24px;right:24px;bottom:24px;z-index:1}
+    .case-tag{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:14px}
+    .case h3{margin:0 0 12px;font-size:clamp(28px,4vw,46px);line-height:1.02;letter-spacing:-.05em}
+    .case p{margin:0;color:var(--muted);line-height:1.86;font-size:15px;max-width:34em}
+
+    .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px}
+    .service{padding:22px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.34);transition:.28s ease}
+    .service:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.22)}
+    .service small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muter);margin-bottom:12px}
+    .service h4{margin:0 0 10px;font-size:26px;line-height:1.05;letter-spacing:-.05em}
+    .service p{margin:0;color:var(--muted);line-height:1.85;font-size:14px}
+
+    .logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:26px}
+    .logo-box{height:94px;border:1px solid var(--line);border-radius:24px;display:grid;place-items:center;color:#d0d0cb;background:rgba(255,255,255,.28);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+
+    .about{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}
+    .about-copy,.about-metrics{padding:28px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.03)}
+    .about-copy p{margin:0 0 14px;color:var(--muted);font-size:16px;line-height:1.95}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;height:100%}
+    .metric{padding:22px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));min-height:148px}
+    .metric strong{display:block;font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.08em;margin-bottom:10px}
+    .metric span{display:block;color:var(--muted);line-height:1.6}
+
+    .faq{display:grid;gap:14px;margin-top:28px}
+    .faq-item{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.34);overflow:hidden}
+    .faq-q{width:100%;padding:22px 24px;border:none;background:transparent;color:var(--text);text-align:left;display:flex;justify-content:space-between;gap:16px;align-items:center;cursor:pointer}
+    .faq-q span:first-child{font-size:18px;line-height:1.4}
+    .faq-icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);flex:none;color:var(--muted);transition:.25s ease}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-a p{margin:0;padding:0 24px 22px;color:var(--muted);line-height:1.9}
+    .faq-item.active .faq-icon{transform:rotate(45deg);background:linear-gradient(135deg, #c7a671, #b08a52);color:#fff;border-color:rgba(185,150,93,.45)}
+
+    .contact{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .cta-panel,.contact-card{padding:30px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02))}
+    .cta-panel h2{margin:0 0 16px;font-size:clamp(40px,6vw,88px);line-height:.95;letter-spacing:-.07em;max-width:11ch}
+    .cta-panel p{margin:0 0 24px;color:var(--muted);font-size:16px;line-height:1.9;max-width:42em}
+    .contact-card{display:grid;gap:16px;align-content:start}
+    .info-row{padding:16px 0;border-bottom:1px solid var(--line-soft)}
+    .info-row:last-child{border-bottom:none}
+    .info-row small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muter);margin-bottom:8px}
+    .info-row div{font-size:16px;line-height:1.7}
+    .qr-box{margin-top:6px;display:flex;gap:18px;align-items:center;padding:18px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.025)}
+    .qr-box img{width:112px;height:112px;padding:8px;background:#fff;border-radius:16px;box-shadow:0 10px 24px rgba(103,81,56,.10)}
+    .qr-box p{margin:0;color:var(--muted);line-height:1.8;font-size:14px}
+
+    .footer{padding:22px 0 42px;color:var(--muter);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    .footer-row{display:flex;justify-content:space-between;gap:18px;align-items:center}
+
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.is-visible{opacity:1;transform:none}
+
+    @media (max-width:1080px){
+      .hero-grid,.about,.contact{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr 1fr}
+      .logos{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media (max-width:760px){
+      .wrap{width:min(var(--max),calc(100% - 24px))}
+      .nav{height:72px}
+      .nav-links{display:none}
+      .hero{padding-top:128px}
+      .hero-cta{gap:10px}
+      .btn{width:100%;justify-content:center}
+      .cases,.services,.metric-grid,.logos{grid-template-columns:1fr}
+      .case{min-height:320px}
+      .section{padding:66px 0}
+      .footer-row{flex-direction:column;align-items:flex-start}
+      .qr-box{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <span class="brand-mark"><img src="logo.svg" alt="福美株式会社"></span>
+        <span class="brand-copy">
+          <strong>福美株式会社</strong>
+          <span class="t" data-zh="日本多元经营企业" data-ja="日本の多角経営企業"></span>
+        </span>
+      </a>
+      <div class="nav-actions">
+        <nav class="nav-links">
+          <a href="#cases" class="t" data-zh="业务案例" data-ja="事業内容"></a>
+          <a href="#services" class="t" data-zh="核心能力" data-ja="強み"></a>
+          <a href="#about" class="t" data-zh="关于我们" data-ja="私たちについて"></a>
+          <a href="#contact" class="t" data-zh="联系" data-ja="お問い合わせ"></a>
+        </nav>
+        <div class="lang-switch">
+          <button class="lang-btn" data-l="zh" type="button">中文</button>
+          <button class="lang-btn" data-l="ja" type="button">Ja</button>
+        </div>
+        <a class="ghost-btn t" href="skyui-closer-report.html" data-zh="年度报告" data-ja="年次報告"></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap reveal">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow t" data-zh="FUKUMI CORPORATE SITE" data-ja="FUKUMI CORPORATE SITE"></span>
+          <h1 class="t" data-zh="让贸易、资产与服务形成长期价值。" data-ja="貿易・資産・サービスを、長期価値へ。"></h1>
+          <p class="t" data-zh="福美株式会社立足日本，围绕出口贸易、不动产投资管理与医疗咨询三大板块，构建更稳健、更可持续的经营体系。我们不是堆信息，而是把每一项业务做成能够持续沉淀现金流与信任的长期事业。" data-ja="福美株式会社は日本を拠点に、輸出貿易・不動産投資管理・医療コンサルティングの三事業を軸として、より安定的で持続可能な経営体制を構築しています。単なる情報の羅列ではなく、継続的なキャッシュフローと信頼を生む事業づくりを重視しています。"></p>
+          <div class="hero-cta">
+            <a href="#cases" class="btn btn-primary t" data-zh="查看核心业务" data-ja="主な事業を見る"><span class="arrow">↗</span></a>
+            <a href="#contact" class="btn btn-secondary t" data-zh="立即联系" data-ja="お問い合わせ"></a>
+          </div>
+        </div>
+        <aside class="hero-side">
+          <div class="side-label">2026 Focus</div>
+          <div class="side-big t" data-zh="三大业务
+联动增长" data-ja="3つの事業で
+連動成長"></div>
+          <div class="side-list">
+            <div class="side-chip t" data-zh="出口贸易：扩大中日双向销售" data-ja="輸出貿易：日中販売を拡大"></div>
+            <div class="side-chip t" data-zh="不动产：提升租金与翻新效率" data-ja="不動産：賃料と改修効率を向上"></div>
+            <div class="side-chip t" data-zh="医疗咨询：恢复增长并建立新利润点" data-ja="医療相談：成長回復と新収益化"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="ticker">
+      <div class="ticker-track">
+        <div class="ticker-item">EXPORT TRADE</div><div class="ticker-item">REAL ESTATE</div><div class="ticker-item">MEDICAL CONSULTING</div><div class="ticker-item">JAPAN MARKET</div><div class="ticker-item">SUSTAINABLE GROWTH</div><div class="ticker-item">FUKUMI CO., LTD.</div>
+        <div class="ticker-item">EXPORT TRADE</div><div class="ticker-item">REAL ESTATE</div><div class="ticker-item">MEDICAL CONSULTING</div><div class="ticker-item">JAPAN MARKET</div><div class="ticker-item">SUSTAINABLE GROWTH</div><div class="ticker-item">FUKUMI CO., LTD.</div>
+      </div>
+    </div>
+
+    <section class="section wrap reveal" id="cases">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Cases</div>
+          <h2 class="section-title t" data-zh="我们正在做的三件事。" data-ja="私たちが進める3つの事業。"></h2>
+        </div>
+        <div class="section-lead t" data-zh="这部分我特意按你给的网站那种方式处理成大卡片展示，不再是普通公司简介式排版，而是更偏品牌型官网的“业务案例感”。" data-ja="このセクションは一般的な会社紹介ではなく、ブランドサイトらしい大きなケースカード形式で構成しています。"></div>
+      </div>
+
+      <div class="cases">
+        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(212,255,63,.28), transparent 65%)">
+          <div class="case-top"><span class="case-index">01 / TRADE</span><span class="case-arrow">↗</span></div>
+          <div class="case-body">
+            <div class="case-tag t" data-zh="出口贸易" data-ja="輸出貿易"></div>
+            <h3 class="t" data-zh="动漫周边与卡牌商品出口" data-ja="アニメグッズとカード商品の輸出"></h3>
+            <p class="t" data-zh="以日本动漫周边、宝可梦卡片等商品为核心，持续扩大对华出口规模，并同步建设日本本地线上线下销售渠道。" data-ja="日本のアニメ関連商品やポケモンカードを中心に、中国向け輸出を拡大しつつ、日本国内の販売チャネルも整備しています。"></p>
+          </div>
+        </article>
+
+        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(108,163,255,.28), transparent 65%)">
+          <div class="case-top"><span class="case-index">02 / ASSET</span><span class="case-arrow">↗</span></div>
+          <div class="case-body">
+            <div class="case-tag t" data-zh="不动产投资管理" data-ja="不動産投資・管理"></div>
+            <h3 class="t" data-zh="老旧住宅再生与出租运营" data-ja="老朽住宅の再生と賃貸運営"></h3>
+            <p class="t" data-zh="聚焦长期空置的一户建住宅，通过整修翻新后出租，并以自主管理提升运营效率与长期租金收益。" data-ja="長期空き家となった戸建住宅を取得し、改修後に賃貸。自主管理により運営効率と継続的な賃料収益を高めています。"></p>
+          </div>
+        </article>
+
+        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(255,145,110,.28), transparent 65%)">
+          <div class="case-top"><span class="case-index">03 / HEALTH</span><span class="case-arrow">↗</span></div>
+          <div class="case-body">
+            <div class="case-tag t" data-zh="医疗咨询" data-ja="医療コンサルティング"></div>
+            <h3 class="t" data-zh="面向中国客户的日本医疗信息服务" data-ja="中国顧客向け日本医療情報サービス"></h3>
+            <p class="t" data-zh="围绕日本先进医疗信息、咨询与相关资源对接，为中国客户提供更清晰可信的服务入口，并逐步恢复增长。" data-ja="日本の先進医療情報や相談支援を軸に、中国顧客へ分かりやすく信頼できる窓口を提供し、事業成長を回復させていきます。"></p>
+          </div>
+        </article>
+
+        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(255,255,255,.16), transparent 68%)">
+          <div class="case-top"><span class="case-index">04 / NEXT</span><span class="case-arrow">↗</span></div>
+          <div class="case-body">
+            <div class="case-tag t" data-zh="下一阶段" data-ja="次のフェーズ"></div>
+            <h3 class="t" data-zh="以现金流为基础推进持续扩张" data-ja="キャッシュフローを基盤に持続拡張"></h3>
+            <p class="t" data-zh="贸易业务支撑资产配置，资产收益反哺业务扩张，咨询板块提供新增长点，形成互相支撑的多元结构。" data-ja="貿易が資産投資を支え、資産収益が事業拡張を支え、相談事業が新たな成長軸となる相互補完型の構造です。"></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section wrap reveal" id="services">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">What We Do Best</div>
+          <h2 class="section-title t" data-zh="我们的核心能力。" data-ja="私たちの強み。"></h2>
+        </div>
+        <div class="section-lead t" data-zh="这里也不是老式表格，我改成更接近参考站的能力模块：短标题、强节奏、可悬浮交互。" data-ja="ここも旧来の表形式ではなく、参考サイトに近いテンポ感のある能力モジュールにしています。"></div>
+      </div>
+      <div class="services">
+        <article class="service reveal"><small>01</small><h4 class="t" data-zh="跨境商品运营" data-ja="越境商品運営"></h4><p class="t" data-zh="围绕选品、供给、渠道与周转效率，建立稳定的商品输出能力。" data-ja="選定・供給・販路・回転効率を軸に、安定した商品供給体制を構築します。"></p></article>
+        <article class="service reveal"><small>02</small><h4 class="t" data-zh="资产整修与管理" data-ja="資産改修と管理"></h4><p class="t" data-zh="从老旧房产获取、整修、出租到后续维护，形成可复制的管理闭环。" data-ja="老朽物件の取得・改修・賃貸・保守まで、一貫した運営サイクルを実現します。"></p></article>
+        <article class="service reveal"><small>03</small><h4 class="t" data-zh="日本医疗信息咨询" data-ja="日本医療情報コンサル"></h4><p class="t" data-zh="帮助中国客户更高效理解日本医疗资源与服务内容。" data-ja="中国顧客が日本の医療資源とサービスを理解しやすい形で案内します。"></p></article>
+      </div>
+    </section>
+
+    <section class="section wrap reveal">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Highlights</div>
+          <h2 class="section-title t" data-zh="业务数字与经营概况。" data-ja="事業数値と経営概要。"></h2>
+        </div>
+      </div>
+      <div class="about" id="about">
+        <div class="about-copy reveal">
+          <p class="t" data-zh="公司依法在日本设立，目前以贸易收入、不动产租金及医疗咨询作为主要收入来源。公司无银行借贷、无不良资产，资金结构清晰。" data-ja="当社は日本で適法に設立され、現在は貿易収入・不動産賃料・医療相談を主な収益源としています。銀行借入や不良資産はなく、資金構造は明確です。"></p>
+          <p class="t" data-zh="下一决算期计划推进债转股，将注册资本提升至 3000 万日元，进一步增强财务基础与外部信用。" data-ja="次回決算期にはデット・エクイティ・スワップを進め、資本金を3,000万円へ引き上げ、財務基盤と対外信用をさらに強化する予定です。"></p>
+        </div>
+        <div class="about-metrics reveal">
+          <div class="metric-grid">
+            <div class="metric"><strong>936万</strong><span class="t" data-zh="2025 年出口额（日元）" data-ja="2025年 輸出売上高（円）"></span></div>
+            <div class="metric"><strong>529万</strong><span class="t" data-zh="2025 年租金收入（日元）" data-ja="2025年 家賃収入（円）"></span></div>
+            <div class="metric"><strong>3000万</strong><span class="t" data-zh="计划增资后资本金（日元）" data-ja="増資後予定資本金（円）"></span></div>
+            <div class="metric"><strong>3</strong><span class="t" data-zh="核心业务板块" data-ja="主要事業セクター"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap reveal">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Common Questions</div>
+          <h2 class="section-title t" data-zh="常见问题。" data-ja="よくあるご質問。"></h2>
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-item active">
+          <button class="faq-q" type="button"><span class="t" data-zh="你们主要做哪些业务？" data-ja="主な事業内容は何ですか？"></span><span class="faq-icon">＋</span></button>
+          <div class="faq-a" style="max-height:180px"><p class="t" data-zh="目前主要围绕出口贸易、不动产投资管理、医疗咨询三大板块展开，并以贸易现金流支撑资产扩张与新业务恢复。" data-ja="現在は輸出貿易、不動産投資管理、医療コンサルティングの3事業を中心に展開し、貿易のキャッシュフローで資産拡張と新規成長を支えています。"></p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span class="t" data-zh="你们更偏贸易公司还是投资公司？" data-ja="貿易会社ですか、それとも投資会社ですか？"></span><span class="faq-icon">＋</span></button>
+          <div class="faq-a"><p class="t" data-zh="两者兼有。贸易业务是高周转现金流来源，不动产是稳定收益与资产沉淀，医疗咨询则是新增增长方向。" data-ja="両方の側面があります。貿易は高回転のキャッシュフロー源、不動産は安定収益と資産蓄積、医療相談は新たな成長分野です。"></p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span class="t" data-zh="是否可以查看更正式的报告材料？" data-ja="より正式な報告資料はありますか？"></span><span class="faq-icon">＋</span></button>
+          <div class="faq-a"><p class="t" data-zh="可以。网站已保留年度报告入口，你可以提供给客户、合作方或行政审查场景使用。" data-ja="はい。年次報告ページを用意しており、取引先・提携先・行政審査向け資料として利用できます。"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap reveal" id="contact">
+      <div class="contact">
+        <div class="cta-panel">
+          <div class="section-kicker">Contact</div>
+          <h2 class="t" data-zh="让我们一起建立更长期的合作。" data-ja="長期的な協力関係を築きましょう。"></h2>
+          <p class="t" data-zh="如果你希望了解公司业务、合作可能性，或需要正式材料用于对外说明，可以通过下方方式联系我们。" data-ja="事業内容や協業の可能性、あるいは対外説明のための正式資料が必要な場合は、以下よりご連絡ください。"></p>
+          <div class="hero-cta">
+            <a href="mailto:contact@fukumi.co.jp" class="btn btn-primary">contact@fukumi.co.jp</a>
+          </div>
+        </div>
+        <aside class="contact-card">
+          <div class="info-row"><small>Company</small><div>福美株式会社 / FUKUMI CO., LTD.</div></div>
+          <div class="info-row"><small class="t" data-zh="代表" data-ja="代表者"></small><div class="t" data-zh="代表取缔役 朱麗燕" data-ja="代表取締役 朱麗燕"></div></div>
+          <div class="info-row"><small>Email</small><div>contact@fukumi.co.jp</div></div>
+          <div class="info-row"><small>Tel</small><div>+81-00-0000-0000</div></div>
+          <div class="info-row"><small class="t" data-zh="地址" data-ja="住所"></small><div class="t" data-zh="日本（详细地址待更新）" data-ja="日本（詳細住所は後日更新）"></div></div>
+          <div class="qr-box">
+            <img src="qr-contact.svg" alt="qr">
+            <p class="t" data-zh="扫码联系
+可用于快速建立初步沟通。" data-ja="QRコードでご連絡ください。
+初回のやり取りをスムーズに始められます。"></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <div class="footer-row">
+      <span>© 2026 FUKUMI CO., LTD.</span>
+      <span class="t" data-zh="日本合法注册企业" data-ja="日本国内適法設立会社"></span>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var KEY='fukumi-lang';
+      var root=document.documentElement;
+      var nodes=document.querySelectorAll('.t');
+      var btns=document.querySelectorAll('.lang-btn');
+      function setText(el, lang){
+        var val=el.getAttribute('data-'+lang);
+        if(val!=null) el.textContent=val;
+      }
+      function apply(lang){
+        lang=lang==='ja'?'ja':'zh';
+        root.setAttribute('data-lang',lang);
+        root.lang=lang==='ja'?'ja':'zh-CN';
+        nodes.forEach(function(n){setText(n,lang)});
+        document.title=lang==='ja'?'福美株式会社 | ブランドサイト':'福美株式会社 | 品牌官网';
+        try{localStorage.setItem(KEY,lang)}catch(e){}
+      }
+      btns.forEach(function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-l'))})});
+      try{apply(localStorage.getItem(KEY)||'zh')}catch(e){apply('zh')}
+
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){entry.target.classList.add('is-visible');}
+        })
+      },{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+      document.querySelectorAll('.faq-item').forEach(function(item){
+        var btn=item.querySelector('.faq-q');
+        var ans=item.querySelector('.faq-a');
+        btn.addEventListener('click',function(){
+          var open=item.classList.contains('active');
+          document.querySelectorAll('.faq-item').forEach(function(it){
+            it.classList.remove('active');
+            it.querySelector('.faq-a').style.maxHeight='0px';
+          });
+          if(!open){
+            item.classList.add('active');
+            ans.style.maxHeight=ans.scrollHeight+'px';
+          }
+        })
+      });
+    })();
+  </script>
+</body>
+</html>

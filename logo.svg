@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
+  <rect x="44" y="44" width="424" height="424" rx="84" stroke="rgba(255,244,225,0.45)" stroke-width="2"/>
+  <path d="M116 150H396" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round"/>
+  <path d="M148 206H364" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round" opacity="0.88"/>
+  <path d="M134 270H378" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <path d="M170 332H342" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <text x="256" y="286" text-anchor="middle" fill="#FFF6E9" font-size="168" font-family="Noto Serif SC, Source Han Serif SC, serif" font-weight="700">福</text>
+  <text x="256" y="404" text-anchor="middle" fill="#F7DEC0" font-size="36" font-family="Georgia, serif" letter-spacing="8">FUKUMI</text>
+  <defs>
+    <linearGradient id="bg" x1="64" y1="40" x2="444" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A73625"/>
+      <stop offset="1" stop-color="#5D1812"/>
+    </linearGradient>
+  </defs>
+</svg>
