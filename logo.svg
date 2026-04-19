@@ -1,16 +1,25 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
-  <rect x="44" y="44" width="424" height="424" rx="84" stroke="rgba(255,244,225,0.45)" stroke-width="2"/>
-  <path d="M116 150H396" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round"/>
-  <path d="M148 206H364" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round" opacity="0.88"/>
-  <path d="M134 270H378" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
-  <path d="M170 332H342" stroke="#F8E7CF" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
-  <text x="256" y="286" text-anchor="middle" fill="#FFF6E9" font-size="168" font-family="Noto Serif SC, Source Han Serif SC, serif" font-weight="700">福</text>
-  <text x="256" y="404" text-anchor="middle" fill="#F7DEC0" font-size="36" font-family="Georgia, serif" letter-spacing="8">FUKUMI</text>
-  <defs>
-    <linearGradient id="bg" x1="64" y1="40" x2="444" y2="472" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A73625"/>
-      <stop offset="1" stop-color="#5D1812"/>
-    </linearGradient>
-  </defs>
+  <rect width="512" height="512" rx="108" fill="#F8F0E6"/>
+  <g stroke="#B73636" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M158 118H355L414 171V344L353 398H159L98 344V177L158 118Z"/>
+    <path d="M158 118L214 168V348L159 398"/>
+    <path d="M355 118L298 168V348L353 398"/>
+    <path d="M214 168H298"/>
+    <path d="M123 189H170"/>
+    <path d="M341 189H389"/>
+    <path d="M136 211V349"/>
+    <path d="M181 133H331"/>
+    <path d="M181 153H331"/>
+    <path d="M171 221V385"/>
+    <path d="M200 206V372"/>
+    <path d="M311 206V372"/>
+    <path d="M340 221V385"/>
+    <path d="M123 320H172"/>
+    <path d="M341 320H389"/>
+    <path d="M224 120L270 153"/>
+    <path d="M245 106H330L366 133V176"/>
+    <path d="M146 134L111 164V201"/>
+    <path d="M254 179V392"/>
+    <path d="M228 392H280"/>
+  </g>
 </svg>

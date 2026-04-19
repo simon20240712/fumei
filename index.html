@@ -1,155 +1,342 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>福美株式会社 | 品牌官网</title>
+  <title>福美株式会社 | 企业官网</title>
   <style>
     :root{
-      --bg:#f3ede5;
-      --bg-soft:#ede5db;
-      --panel:rgba(255,255,255,.34);
-      --panel-2:rgba(255,250,244,.50);
-      --line:rgba(103,81,56,.14);
-      --line-soft:rgba(103,81,56,.08);
-      --text:#231c17;
-      --muted:#6d6054;
-      --muter:#9a8b7b;
-      --brand:#b9965d;
-      --brand-soft:rgba(185,150,93,.14);
+      --bg:#efe4d5;
+      --paper:#fbf7f1;
+      --line:rgba(78,55,34,.12);
+      --text:#20150f;
+      --muted:#6f5d4f;
+      --brand:#9c6430;
+      --brand-2:#c48e57;
+      --shadow:0 28px 70px rgba(60,34,15,.12);
+      --radius-xl:34px;
+      --radius-lg:24px;
       --max:1280px;
-      --radius:28px;
-      --shadow:0 24px 80px rgba(103,81,56,.10);
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(circle at 12% 0%, rgba(255,255,255,.72), transparent 26%),radial-gradient(circle at 100% 10%, rgba(185,150,93,.16), transparent 22%),radial-gradient(circle at 82% 28%, rgba(255,244,228,.86), transparent 18%),linear-gradient(180deg, #f8f3ec 0%, #f1e9df 52%, #ebe1d5 100%);color:var(--text);font-family:Inter,"PingFang SC","Hiragino Sans GB","Microsoft YaHei UI","Noto Sans SC","Yu Gothic",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"PingFang SC","Microsoft YaHei UI","Noto Sans SC",sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,.88), transparent 20%),
+        radial-gradient(circle at 85% 12%, rgba(196,142,87,.28), transparent 18%),
+        linear-gradient(180deg, #f8f2eb 0%, #f2e7da 48%, #ebdccb 100%);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      right:-10vw;
+      top:-6vh;
+      width:38vw;
+      height:38vw;
+      background:radial-gradient(circle, rgba(196,142,87,.2), transparent 62%);
+      filter:blur(16px);
+      transform:translate3d(var(--orb-x,0),var(--orb-y,0),0);
+      transition:transform .5s ease-out;
+      pointer-events:none;
+      z-index:0;
+    }
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
-    button,input,textarea{font:inherit}
-    .wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
-
-    .topbar{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(248,243,236,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line-soft);box-shadow:0 8px 30px rgba(103,81,56,.06)}
-    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    main,.topbar,.footer{position:relative;z-index:1}
+    .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto}
+    .topbar{
+      position:sticky;top:0;z-index:30;
+      backdrop-filter:blur(18px);
+      background:rgba(248,242,235,.74);
+      border-bottom:1px solid rgba(78,55,34,.08);
+      transition:background .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+    .topbar.is-scrolled{
+      background:rgba(248,242,235,.92);
+      box-shadow:0 10px 30px rgba(60,34,15,.08);
+      border-bottom-color:rgba(78,55,34,.16);
+    }
+    .nav{
+      min-height:90px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
     .brand{display:flex;align-items:center;gap:14px;min-width:0}
-    .brand-mark{width:42px;height:42px;border:1px solid var(--line);border-radius:14px;padding:7px;background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,249,242,.26));box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
-    .brand-copy{display:flex;flex-direction:column;line-height:1.1}
-    .brand-copy strong{font-size:14px;letter-spacing:.04em}
-    .brand-copy span{font-size:12px;color:var(--muter)}
-    .nav-actions{display:flex;align-items:center;gap:12px}
-    .nav-links{display:flex;align-items:center;gap:12px}
-    .nav-links a,.lang-btn,.ghost-btn{height:42px;padding:0 16px;border:1px solid var(--line);border-radius:999px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.24);transition:.28s ease}
-    .nav-links a:hover,.lang-btn:hover,.ghost-btn:hover{color:var(--text);border-color:rgba(255,255,255,.20);transform:translateY(-1px)}
+    .brand-mark{
+      width:62px;height:62px;border-radius:18px;border:1px solid var(--line);
+      background:rgba(255,255,255,.9);padding:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+      object-fit:contain;
+    }
+    .brand-copy strong{display:block;font-size:18px;letter-spacing:.06em}
+    .brand-copy span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .nav-links{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .nav-links a,.lang-btn{
+      height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.56);color:var(--muted);font-size:13px;
+      display:inline-flex;align-items:center;transition:transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+    }
+    .nav-links a:hover,.lang-btn:hover{transform:translateY(-2px);box-shadow:0 12px 22px rgba(60,34,15,.08);border-color:rgba(156,100,48,.24)}
     .lang-switch{display:flex;gap:8px}
-    [data-lang="zh"] .lang-btn[data-l="zh"],[data-lang="ja"] .lang-btn[data-l="ja"]{background:var(--text);color:#fff;border-color:var(--text)}
+    html[data-lang="zh"] .lang-btn[data-lang-btn="zh"],
+    html[data-lang="ja"] .lang-btn[data-lang-btn="ja"]{
+      background:linear-gradient(135deg,var(--brand-2),var(--brand));
+      color:#fff;border-color:transparent;
+    }
 
-    .hero{padding:150px 0 54px;position:relative}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) 320px;gap:30px;align-items:end}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.03)}
-    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);box-shadow:0 0 18px var(--brand)}
-    .hero h1{margin:22px 0 18px;font-size:clamp(54px,10.5vw,132px);line-height:.92;letter-spacing:-.07em;font-weight:800;max-width:10ch}
-    .hero p{max-width:760px;font-size:clamp(16px,2vw,21px);line-height:1.85;color:var(--muted);margin:0}
-    .hero-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
-    .btn{height:54px;padding:0 22px;border-radius:999px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:12px;transition:.28s ease;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:linear-gradient(135deg, #c7a671, #b08a52);color:#fff;border-color:rgba(185,150,93,.55)}
-    .btn-secondary{background:rgba(255,255,255,.34);color:var(--text)}
-    .btn .arrow{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:rgba(255,255,255,.24)}
-    .hero-side{padding:26px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg, rgba(255,255,255,.58), rgba(252,246,238,.34));box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:310px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-    .hero-side::before{content:"";position:absolute;inset:auto -40px -70px auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle, rgba(212,255,63,.32), transparent 68%);filter:blur(10px)}
-    .side-label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muter)}
-    .side-big{margin-top:18px;font-size:52px;line-height:.94;font-weight:800;letter-spacing:-.06em}
-    .side-list{margin-top:22px;display:grid;gap:10px}
-    .side-chip{padding:12px 14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.34);font-size:13px;color:var(--muted)}
+    .hero{padding:28px 0 24px}
+    .hero-shell{
+      min-height:760px;border-radius:42px;overflow:hidden;border:1px solid rgba(78,55,34,.08);
+      box-shadow:var(--shadow);
+      background:
+        linear-gradient(115deg, rgba(24,16,12,.68), rgba(52,32,18,.42)),
+        url("https://bkimg.cdn.bcebos.com/pic/500fd9f9d72a6059252d5268996d239b033b5bb50c35") center/cover no-repeat;
+      position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) 360px;align-items:end;
+    }
+    .hero-shell::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(180deg, rgba(8,8,8,.06), rgba(14,10,8,.2)),
+        radial-gradient(circle at 72% 22%, rgba(255,222,180,.18), transparent 18%),
+        linear-gradient(90deg, rgba(18,12,10,.62) 0%, rgba(18,12,10,.36) 52%, rgba(18,12,10,.18) 100%);
+    }
+    .hero-copy,.hero-panel{position:relative;z-index:1}
+    .hero-copy{padding:58px 52px 54px;color:#f9f4ee;max-width:860px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);
+      color:rgba(255,245,235,.86);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    }
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:#f2c083;box-shadow:0 0 18px rgba(242,192,131,.7)}
+    h1,h2,h3,.metric strong,.hero-panel strong{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif}
+    h1{margin:24px 0 18px;font-size:clamp(48px,8vw,102px);line-height:.92;letter-spacing:-.05em;max-width:8ch;font-weight:700}
+    .hero-lead{margin:0;max-width:700px;color:rgba(250,244,237,.82);font-size:17px;line-height:2}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{
+      min-height:54px;padding:0 22px;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.08);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px;
+      transition:transform .28s ease, box-shadow .28s ease, background .28s ease, border-color .28s ease;
+      cursor:pointer;font-family:inherit;appearance:none;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 16px 28px rgba(0,0,0,.16)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand-2),var(--brand));border-color:transparent}
+    .btn-light{background:rgba(255,255,255,.14)}
+    .hero-panel{
+      padding:22px;margin:0 26px 26px 0;border-radius:28px;
+      background:linear-gradient(180deg, rgba(252,248,244,.88), rgba(249,241,232,.68));
+      border:1px solid rgba(255,255,255,.26);box-shadow:0 24px 50px rgba(25,16,10,.18);color:var(--text);backdrop-filter:blur(12px);
+    }
+    .hero-panel small{display:block;color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+    .hero-panel strong{display:block;font-size:38px;line-height:1.04;letter-spacing:-.05em;margin-bottom:18px}
+    .hero-chip{
+      padding:13px 14px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.64);
+      color:var(--muted);font-size:14px;line-height:1.8;margin-top:10px;animation:floatIn .75s ease both;
+    }
+    .hero-chip:nth-child(3){animation-delay:.08s}
+    .hero-chip:nth-child(4){animation-delay:.16s}
 
-    .ticker{padding:20px 0 34px;border-bottom:1px solid var(--line-soft);overflow:hidden}
-    .ticker-track{display:flex;gap:16px;min-width:max-content;animation:marquee 26s linear infinite}
-    .ticker-item{padding:12px 18px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.34);font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-    .section{padding:86px 0;border-bottom:1px solid var(--line-soft)}
-    .section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:30px}
-    .section-kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muter);margin-bottom:10px}
-    .section-title{font-size:clamp(34px,5vw,76px);letter-spacing:-.06em;line-height:.96;font-weight:800;margin:0;max-width:10ch}
-    .section-lead{max-width:520px;color:var(--muted);font-size:16px;line-height:1.9}
-
-    .cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .case{position:relative;min-height:360px;padding:24px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,249,242,.26));overflow:hidden;transition:transform .4s ease,border-color .4s ease,background .4s ease}
-    .case:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.24);background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03))}
-    .case::before{content:"";position:absolute;inset:auto -80px -80px auto;width:260px;height:260px;border-radius:50%;background:var(--caseGlow, radial-gradient(circle, rgba(212,255,63,.30), transparent 65%));filter:blur(6px);opacity:.8;transition:transform .4s ease}
-    .case:hover::before{transform:scale(1.08)}
-    .case-top{display:flex;justify-content:space-between;gap:20px;align-items:start;position:relative;z-index:1}
-    .case-index{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muter)}
-    .case-arrow{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:20px;color:var(--muted);transition:.28s ease;background:rgba(255,255,255,.03)}
-    .case:hover .case-arrow{transform:translate(4px,-4px);background:linear-gradient(135deg, #c7a671, #b08a52);color:#fff;border-color:rgba(185,150,93,.45)}
-    .case-body{position:absolute;left:24px;right:24px;bottom:24px;z-index:1}
-    .case-tag{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:14px}
-    .case h3{margin:0 0 12px;font-size:clamp(28px,4vw,46px);line-height:1.02;letter-spacing:-.05em}
-    .case p{margin:0;color:var(--muted);line-height:1.86;font-size:15px;max-width:34em}
-
-    .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px}
-    .service{padding:22px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.34);transition:.28s ease}
-    .service:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.22)}
-    .service small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muter);margin-bottom:12px}
-    .service h4{margin:0 0 10px;font-size:26px;line-height:1.05;letter-spacing:-.05em}
-    .service p{margin:0;color:var(--muted);line-height:1.85;font-size:14px}
-
-    .logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:26px}
-    .logo-box{height:94px;border:1px solid var(--line);border-radius:24px;display:grid;place-items:center;color:#d0d0cb;background:rgba(255,255,255,.28);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-
-    .about{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}
-    .about-copy,.about-metrics{padding:28px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.03)}
-    .about-copy p{margin:0 0 14px;color:var(--muted);font-size:16px;line-height:1.95}
-    .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;height:100%}
-    .metric{padding:22px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));min-height:148px}
-    .metric strong{display:block;font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.08em;margin-bottom:10px}
-    .metric span{display:block;color:var(--muted);line-height:1.6}
-
-    .faq{display:grid;gap:14px;margin-top:28px}
-    .faq-item{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.34);overflow:hidden}
-    .faq-q{width:100%;padding:22px 24px;border:none;background:transparent;color:var(--text);text-align:left;display:flex;justify-content:space-between;gap:16px;align-items:center;cursor:pointer}
-    .faq-q span:first-child{font-size:18px;line-height:1.4}
-    .faq-icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);flex:none;color:var(--muted);transition:.25s ease}
-    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
-    .faq-a p{margin:0;padding:0 24px 22px;color:var(--muted);line-height:1.9}
-    .faq-item.active .faq-icon{transform:rotate(45deg);background:linear-gradient(135deg, #c7a671, #b08a52);color:#fff;border-color:rgba(185,150,93,.45)}
-
-    .contact{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
-    .cta-panel,.contact-card{padding:30px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02))}
-    .cta-panel h2{margin:0 0 16px;font-size:clamp(40px,6vw,88px);line-height:.95;letter-spacing:-.07em;max-width:11ch}
-    .cta-panel p{margin:0 0 24px;color:var(--muted);font-size:16px;line-height:1.9;max-width:42em}
-    .contact-card{display:grid;gap:16px;align-content:start}
-    .info-row{padding:16px 0;border-bottom:1px solid var(--line-soft)}
-    .info-row:last-child{border-bottom:none}
-    .info-row small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muter);margin-bottom:8px}
-    .info-row div{font-size:16px;line-height:1.7}
-    .qr-box{margin-top:6px;display:flex;gap:18px;align-items:center;padding:18px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.025)}
-    .qr-box img{width:112px;height:112px;padding:8px;background:#fff;border-radius:16px;box-shadow:0 10px 24px rgba(103,81,56,.10)}
-    .qr-box p{margin:0;color:var(--muted);line-height:1.8;font-size:14px}
-
-    .footer{padding:22px 0 42px;color:var(--muter);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-    .footer-row{display:flex;justify-content:space-between;gap:18px;align-items:center}
-
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-    .reveal.is-visible{opacity:1;transform:none}
-
-    @media (max-width:1080px){
-      .hero-grid,.about,.contact{grid-template-columns:1fr}
-      .services{grid-template-columns:1fr 1fr}
-      .logos{grid-template-columns:repeat(3,minmax(0,1fr))}
+    section{padding:28px 0}
+    .section-head{
+      display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:20px;
+      opacity:0;transform:translateY(34px);transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1);
+    }
+    .section-head small{color:var(--muted);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+    .section-head h2{margin:6px 0 0;font-size:clamp(34px,5vw,62px);line-height:.95;letter-spacing:-.05em}
+    .section-head p{max-width:560px;margin:0;color:var(--muted);line-height:1.9}
+    .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    .statement,.numbers,.business-card,.member-card,.story-card,.contact-card{
+      border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,252,248,.84), rgba(255,248,240,.68));
+      border-radius:var(--radius-xl);box-shadow:var(--shadow);
+    }
+    .statement{padding:30px;min-height:360px;background:linear-gradient(180deg, rgba(255,252,248,.96), rgba(255,246,237,.76)), radial-gradient(circle at 85% 15%, rgba(196,142,87,.16), transparent 22%)}
+    .statement p{margin:0 0 18px;color:var(--muted);font-size:16px;line-height:1.95;max-width:44em}
+    .statement .quote{padding-top:16px;border-top:1px solid rgba(78,55,34,.08);font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:28px;line-height:1.45;letter-spacing:-.03em;color:var(--text)}
+    .numbers{padding:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start}
+    .metric{
+      padding:20px;border-radius:22px;border:1px solid rgba(78,55,34,.08);background:rgba(255,255,255,.62);
+      opacity:0;transform:translateY(34px);transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, border-color .3s ease;
+    }
+    .metric strong{display:block;font-size:clamp(34px,4vw,58px);line-height:1;letter-spacing:-.06em;margin-bottom:10px}
+    .metric span{display:block;color:var(--muted);line-height:1.75;font-size:14px}
+    .business-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .business-card,.member-card,.story-card,.contact-card{
+      opacity:0;transform:translateY(34px);transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease;will-change:transform,opacity;
+    }
+    .business-card{min-height:320px;padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+    .business-card small,.member-card small,.story-card small{display:block;color:var(--brand);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+    .business-card h3,.member-card h3,.story-card h3{margin:0 0 12px;font-size:30px;line-height:1.08;letter-spacing:-.04em}
+    .business-card p,.member-copy p,.story-card p,.contact-card p{margin:0 0 12px;color:var(--muted);line-height:1.9;font-size:15px}
+    .bullet-list{display:grid;gap:10px;margin-top:16px}
+    .bullet{padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.56);border:1px solid rgba(78,55,34,.07);color:var(--muted);line-height:1.75;font-size:14px}
+    .owner-line{
+      margin-top:14px;
+      padding-top:14px;
+      border-top:1px solid rgba(78,55,34,.08);
+      color:#7a5127;
+      font-size:14px;
+      line-height:1.8;
+    }
+    .owner-line strong{
+      font-weight:700;
+      color:var(--brand);
+    }
+    .members{display:grid;grid-template-columns:1fr;gap:22px;position:relative}
+    .member-card{
+      overflow:hidden;
+      display:block;
+      position:relative;
+      min-height:440px;
+      isolation:isolate;
+    }
+    .member-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg, rgba(251,247,241,.96) 0%, rgba(251,247,241,.9) 42%, rgba(251,247,241,.74) 72%, rgba(251,247,241,.52) 100%);
+      z-index:-1;
+    }
+    .member-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      opacity:.18;
+      z-index:-2;
+      transform:scale(1.02);
+      transition:transform 1s cubic-bezier(.2,.7,.2,1), opacity .45s ease, filter .45s ease;
+      filter:saturate(.92) contrast(1.02);
+    }
+    .member-copy{padding:26px}
+    .member-relates{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin:0 0 12px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(156,100,48,.08);
+      border:1px solid rgba(156,100,48,.12);
+      color:#7a5127;
+      font-size:13px;
+      line-height:1.4;
+    }
+    .member-relates::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--brand);
+      box-shadow:0 0 0 4px rgba(156,100,48,.08);
+    }
+    .member-role{color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:16px}
+    .tag-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .tag{padding:8px 12px;border-radius:999px;border:1px solid rgba(78,55,34,.1);background:rgba(255,255,255,.66);color:var(--muted);font-size:13px}
+    .member-link{margin-top:16px;display:inline-flex;align-items:center;gap:8px;color:var(--brand);font-size:14px;font-weight:600}
+    .member-link::after{content:"→";transition:transform .24s ease}
+    .member-card:hover .member-link::after{transform:translateX(3px)}
+    .member-card:hover::after{transform:scale(1.06);opacity:.23;filter:saturate(1.04)}
+    .member-card.member-xq::after{background-image:url("徐倩文/微信图片_20260419222850.jpg")}
+    .member-card.member-ly::after{background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tradescardsyugioh.jpg")}
+    .story-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .story-card{padding:22px;min-height:220px}
+    .contact{display:grid;grid-template-columns:1fr;gap:18px}
+    .contact-card{padding:28px}
+    .contact-card h3{margin:0 0 14px;font-size:36px;letter-spacing:-.04em}
+    .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+    .contact-item{padding:16px 0;border-bottom:1px solid rgba(78,55,34,.08)}
+    .contact-item small{display:block;color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+    .contact-item div{line-height:1.85}
+    .contact-card .btn-light{
+      background:#fff;
+      color:var(--text);
+      border-color:var(--line);
+    }
+    .copy-toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translate(-50%,20px);
+      padding:12px 18px;
+      border-radius:999px;
+      background:rgba(32,21,15,.92);
+      color:#fff;
+      font-size:13px;
+      line-height:1;
+      box-shadow:0 18px 40px rgba(0,0,0,.22);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .25s ease, transform .25s ease;
+      z-index:60;
+    }
+    .copy-toast.is-visible{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+    .map-wrap{
+      margin-top:18px;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(78,55,34,.08);
+      box-shadow:0 20px 44px rgba(60,34,15,.1);
+      background:#f3ece3;
+    }
+    .map-wrap iframe{
+      display:block;
+      width:100%;
+      height:340px;
+      border:0;
+    }
+    .footer{padding:24px 0 44px;color:var(--muted);font-size:12px;letter-spacing:.08em}
+    .is-visible{opacity:1;transform:none}
+    .metric:hover,.business-card:hover,.member-card:hover,.story-card:hover,.contact-card:hover{transform:translateY(-6px);box-shadow:0 34px 78px rgba(60,34,15,.16);border-color:rgba(156,100,48,.22)}
+    @keyframes floatIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    body:not(.ready) .hero-copy,body:not(.ready) .hero-panel{opacity:0;transform:translateY(34px)}
+    body.ready .hero-copy{opacity:1;transform:none;transition:opacity .92s ease, transform .92s cubic-bezier(.2,.7,.2,1)}
+    body.ready .hero-panel{opacity:1;transform:none;transition:opacity .92s ease .12s, transform .92s cubic-bezier(.2,.7,.2,1) .12s}
+    @media (max-width:1120px){
+      .hero-shell,.intro-grid{grid-template-columns:1fr}
+      .hero-shell{min-height:unset}
+      .hero-panel{margin:0 24px 24px 24px}
+      .business-grid,.story-grid{grid-template-columns:1fr 1fr}
     }
     @media (max-width:760px){
-      .wrap{width:min(var(--max),calc(100% - 24px))}
-      .nav{height:72px}
+      .nav{padding:10px 0}
+      .brand-mark{width:56px;height:56px}
+      .brand-copy strong{font-size:17px}
+      .brand-copy span{font-size:13px}
       .nav-links{display:none}
-      .hero{padding-top:128px}
-      .hero-cta{gap:10px}
-      .btn{width:100%;justify-content:center}
-      .cases,.services,.metric-grid,.logos{grid-template-columns:1fr}
-      .case{min-height:320px}
-      .section{padding:66px 0}
-      .footer-row{flex-direction:column;align-items:flex-start}
-      .qr-box{flex-direction:column;align-items:flex-start}
+      .hero-copy{padding:28px 24px 22px}
+      .hero-shell{border-radius:28px}
+      .hero-panel{margin:0 16px 16px 16px}
+      .hero-panel strong{font-size:30px}
+      .section-head h2{font-size:clamp(28px,9vw,44px)}
+      .hero-actions{flex-direction:column}
+      .btn{width:100%}
+      .business-grid,.story-grid,.contact-grid,.numbers{grid-template-columns:1fr}
+      .member-copy{padding:22px}
+      .member-card{min-height:auto}
+      .member-card::before{
+        background:linear-gradient(180deg, rgba(251,247,241,.94) 0%, rgba(251,247,241,.88) 48%, rgba(251,247,241,.8) 100%);
+      }
+      .member-card::after{
+        background-position:center top;
+        opacity:.16;
+      }
+      .map-wrap iframe{height:280px}
+      .wrap{width:min(var(--max),calc(100% - 20px))}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none !important;transition:none !important}
+      body::before{display:none}
+      .hero-copy,.hero-panel,.section-head,.metric,.business-card,.member-card,.story-card,.contact-card{opacity:1 !important;transform:none !important}
     }
   </style>
 </head>
@@ -157,247 +344,545 @@
   <header class="topbar">
     <div class="wrap nav">
       <a class="brand" href="#top">
-        <span class="brand-mark"><img src="logo.svg" alt="福美株式会社"></span>
+        <img class="brand-mark" src="logo.jpg" alt="福美株式会社">
         <span class="brand-copy">
-          <strong>福美株式会社</strong>
-          <span class="t" data-zh="日本多元经营企业" data-ja="日本の多角経営企業"></span>
+          <strong data-i18n="brand_name">福美株式会社</strong>
+          <span data-i18n="brand_sub">日本多元经营与长期资产布局</span>
         </span>
       </a>
-      <div class="nav-actions">
+      <div class="nav-right">
         <nav class="nav-links">
-          <a href="#cases" class="t" data-zh="业务案例" data-ja="事業内容"></a>
-          <a href="#services" class="t" data-zh="核心能力" data-ja="強み"></a>
-          <a href="#about" class="t" data-zh="关于我们" data-ja="私たちについて"></a>
-          <a href="#contact" class="t" data-zh="联系" data-ja="お問い合わせ"></a>
+          <a href="#business" data-i18n="nav_business">核心业务</a>
+          <a href="#members" data-i18n="nav_members">业务负责人</a>
+          <a href="#story" data-i18n="nav_story">发展重点</a>
+          <a href="report.html" data-i18n="nav_report">年度报告</a>
         </nav>
         <div class="lang-switch">
-          <button class="lang-btn" data-l="zh" type="button">中文</button>
-          <button class="lang-btn" data-l="ja" type="button">Ja</button>
+          <button class="lang-btn" type="button" data-lang-btn="zh">中文</button>
+          <button class="lang-btn" type="button" data-lang-btn="ja">日本語</button>
         </div>
-        <a class="ghost-btn t" href="skyui-closer-report.html" data-zh="年度报告" data-ja="年次報告"></a>
       </div>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero wrap reveal">
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow t" data-zh="FUKUMI CORPORATE SITE" data-ja="FUKUMI CORPORATE SITE"></span>
-          <h1 class="t" data-zh="让贸易、资产与服务形成长期价值。" data-ja="貿易・資産・サービスを、長期価値へ。"></h1>
-          <p class="t" data-zh="福美株式会社立足日本，围绕出口贸易、不动产投资管理与医疗咨询三大板块，构建更稳健、更可持续的经营体系。我们不是堆信息，而是把每一项业务做成能够持续沉淀现金流与信任的长期事业。" data-ja="福美株式会社は日本を拠点に、輸出貿易・不動産投資管理・医療コンサルティングの三事業を軸として、より安定的で持続可能な経営体制を構築しています。単なる情報の羅列ではなく、継続的なキャッシュフローと信頼を生む事業づくりを重視しています。"></p>
-          <div class="hero-cta">
-            <a href="#cases" class="btn btn-primary t" data-zh="查看核心业务" data-ja="主な事業を見る"><span class="arrow">↗</span></a>
-            <a href="#contact" class="btn btn-secondary t" data-zh="立即联系" data-ja="お問い合わせ"></a>
+    <section class="hero wrap">
+      <div class="hero-shell">
+        <div class="hero-copy">
+          <span class="eyebrow">FUKUMI CO., LTD.</span>
+          <h1 data-i18n="hero_title">在日本，把贸易、资产与专业服务做成长期事业。</h1>
+          <p class="hero-lead" data-i18n="hero_lead">福美株式会社围绕出口贸易、不动产投资管理与医疗咨询三条主线经营，对外展示以业务结构、负责人和真实经营场景为核心。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#members" data-i18n="hero_btn_members">查看业务负责人</a>
+            <a class="btn btn-light" href="report.html" data-i18n="hero_btn_report">阅读年度报告</a>
+            <a class="btn btn-light" href="#contact" data-i18n="hero_btn_contact">联系福美</a>
           </div>
         </div>
-        <aside class="hero-side">
-          <div class="side-label">2026 Focus</div>
-          <div class="side-big t" data-zh="三大业务
-联动增长" data-ja="3つの事業で
-連動成長"></div>
-          <div class="side-list">
-            <div class="side-chip t" data-zh="出口贸易：扩大中日双向销售" data-ja="輸出貿易：日中販売を拡大"></div>
-            <div class="side-chip t" data-zh="不动产：提升租金与翻新效率" data-ja="不動産：賃料と改修効率を向上"></div>
-            <div class="side-chip t" data-zh="医疗咨询：恢复增长并建立新利润点" data-ja="医療相談：成長回復と新収益化"></div>
+        <aside class="hero-panel">
+          <small data-i18n="focus_label">2026 Focus</small>
+          <strong data-i18n="focus_title">三条业务线<br>同时走深</strong>
+          <div class="hero-chip" data-i18n="focus_1">动漫周边与卡牌商品出口继续扩规模，并强化中日双侧线上销售展示。</div>
+          <div class="hero-chip" data-i18n="focus_2">老旧住宅翻新与出租保持稳定租金收益，支撑长期资产配置。</div>
+          <div class="hero-chip" data-i18n="focus_3">徐倩文加入后，医疗咨询板块开始具备真正的专业承接能力。</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <div>
+          <small>Company Position</small>
+          <h2 data-i18n="position_title">公司概览</h2>
+        </div>
+      </div>
+      <div class="intro-grid">
+        <article class="statement">
+          <p data-i18n="statement_1">福美株式会社当前围绕贸易、不动产与医疗咨询三条业务线持续经营。</p>
+          <p data-i18n="statement_2">公司以日本本地经营为基础，面向中日两侧客户持续推进商品流通、资产管理与专业咨询服务。</p>
+          <div class="quote" data-i18n="statement_quote">在日本，建立可持续经营的多元业务结构。</div>
+        </article>
+        <aside class="numbers">
+          <div class="metric">
+            <strong>936万</strong>
+            <span data-i18n="metric_1">2025 年出口贸易额，贸易仍是当前经营主引擎。</span>
+          </div>
+          <div class="metric">
+            <strong>529万</strong>
+            <span data-i18n="metric_2">2025 年租金收入，不动产业务继续稳定增长。</span>
+          </div>
+          <div class="metric">
+            <strong>131万</strong>
+            <span data-i18n="metric_3">2025 年医疗咨询收入，2026 年重点是恢复增长。</span>
+          </div>
+          <div class="metric">
+            <strong>3000万</strong>
+            <span data-i18n="metric_4">计划增资后注册资本金，用于进一步增强信用基础。</span>
           </div>
         </aside>
       </div>
     </section>
 
-    <div class="ticker">
-      <div class="ticker-track">
-        <div class="ticker-item">EXPORT TRADE</div><div class="ticker-item">REAL ESTATE</div><div class="ticker-item">MEDICAL CONSULTING</div><div class="ticker-item">JAPAN MARKET</div><div class="ticker-item">SUSTAINABLE GROWTH</div><div class="ticker-item">FUKUMI CO., LTD.</div>
-        <div class="ticker-item">EXPORT TRADE</div><div class="ticker-item">REAL ESTATE</div><div class="ticker-item">MEDICAL CONSULTING</div><div class="ticker-item">JAPAN MARKET</div><div class="ticker-item">SUSTAINABLE GROWTH</div><div class="ticker-item">FUKUMI CO., LTD.</div>
-      </div>
-    </div>
-
-    <section class="section wrap reveal" id="cases">
+    <section class="wrap" id="business">
       <div class="section-head">
         <div>
-          <div class="section-kicker">Cases</div>
-          <h2 class="section-title t" data-zh="我们正在做的三件事。" data-ja="私たちが進める3つの事業。"></h2>
+          <small>Core Business</small>
+          <h2 data-i18n="business_title">三项主营业务</h2>
         </div>
-        <div class="section-lead t" data-zh="这部分我特意按你给的网站那种方式处理成大卡片展示，不再是普通公司简介式排版，而是更偏品牌型官网的“业务案例感”。" data-ja="このセクションは一般的な会社紹介ではなく、ブランドサイトらしい大きなケースカード形式で構成しています。"></div>
       </div>
-
-      <div class="cases">
-        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(212,255,63,.28), transparent 65%)">
-          <div class="case-top"><span class="case-index">01 / TRADE</span><span class="case-arrow">↗</span></div>
-          <div class="case-body">
-            <div class="case-tag t" data-zh="出口贸易" data-ja="輸出貿易"></div>
-            <h3 class="t" data-zh="动漫周边与卡牌商品出口" data-ja="アニメグッズとカード商品の輸出"></h3>
-            <p class="t" data-zh="以日本动漫周边、宝可梦卡片等商品为核心，持续扩大对华出口规模，并同步建设日本本地线上线下销售渠道。" data-ja="日本のアニメ関連商品やポケモンカードを中心に、中国向け輸出を拡大しつつ、日本国内の販売チャネルも整備しています。"></p>
+      <div class="business-grid">
+        <article class="business-card">
+          <div>
+            <small>01 / Export Trade</small>
+            <h3 data-i18n="trade_title">动漫周边与卡牌商品出口</h3>
+            <p data-i18n="trade_desc">以日本动漫周边、宝可梦卡片及集换式卡牌相关商品为重点，持续拓展中国线上销售与日本本土网店运营，逐步形成出口与日本国内销售相结合的经营结构。</p>
+            <div class="owner-line" data-i18n-html="trade_owner">对应负责人：<strong>李屹冉</strong></div>
+          </div>
+          <div class="bullet-list">
+            <div class="bullet" data-i18n="trade_b1">2025 年出口额约 936 万日元，贸易业务是当前现金流核心。</div>
+            <div class="bullet" data-i18n="trade_b2">李屹冉的加入，让卡牌方向的展示、沟通与市场表达更加具体。</div>
           </div>
         </article>
-
-        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(108,163,255,.28), transparent 65%)">
-          <div class="case-top"><span class="case-index">02 / ASSET</span><span class="case-arrow">↗</span></div>
-          <div class="case-body">
-            <div class="case-tag t" data-zh="不动产投资管理" data-ja="不動産投資・管理"></div>
-            <h3 class="t" data-zh="老旧住宅再生与出租运营" data-ja="老朽住宅の再生と賃貸運営"></h3>
-            <p class="t" data-zh="聚焦长期空置的一户建住宅，通过整修翻新后出租，并以自主管理提升运营效率与长期租金收益。" data-ja="長期空き家となった戸建住宅を取得し、改修後に賃貸。自主管理により運営効率と継続的な賃料収益を高めています。"></p>
+        <article class="business-card">
+          <div>
+            <small>02 / Real Estate</small>
+            <h3 data-i18n="estate_title">老旧住宅再生与出租管理</h3>
+            <p data-i18n="estate_desc">聚焦日本长期空置的一户建住宅，通过整修、翻新、清洁维护和设备修缮提升出租价值，形成稳定租金收益，并持续扩大可复制的不动产管理能力。</p>
+            <div class="owner-line" data-i18n-html="estate_owner">当前由<strong>福美团队自主运营</strong></div>
+          </div>
+          <div class="bullet-list">
+            <div class="bullet" data-i18n="estate_b1">2025 年租金收入约 529 万日元，高于上一年度约 449 万日元。</div>
+            <div class="bullet" data-i18n="estate_b2">通过自主运营降低维护成本，增强长期收益稳定性。</div>
           </div>
         </article>
-
-        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(255,145,110,.28), transparent 65%)">
-          <div class="case-top"><span class="case-index">03 / HEALTH</span><span class="case-arrow">↗</span></div>
-          <div class="case-body">
-            <div class="case-tag t" data-zh="医疗咨询" data-ja="医療コンサルティング"></div>
-            <h3 class="t" data-zh="面向中国客户的日本医疗信息服务" data-ja="中国顧客向け日本医療情報サービス"></h3>
-            <p class="t" data-zh="围绕日本先进医疗信息、咨询与相关资源对接，为中国客户提供更清晰可信的服务入口，并逐步恢复增长。" data-ja="日本の先進医療情報や相談支援を軸に、中国顧客へ分かりやすく信頼できる窓口を提供し、事業成長を回復させていきます。"></p>
+        <article class="business-card">
+          <div>
+            <small>03 / Medical Consulting</small>
+            <h3 data-i18n="medical_title">日本医疗信息咨询与资源对接</h3>
+            <p data-i18n="medical_desc">面向中国客户提供日本医疗体系、医疗服务信息与诊疗意见解读支持。随着徐倩文于 2026 年 4 月正式加入，该板块已经从“筹备方向”进入“具备专业承接能力”的阶段。</p>
+            <div class="owner-line" data-i18n-html="medical_owner">对应负责人：<strong>徐倩文</strong></div>
           </div>
-        </article>
-
-        <article class="case reveal" style="--caseGlow:radial-gradient(circle, rgba(255,255,255,.16), transparent 68%)">
-          <div class="case-top"><span class="case-index">04 / NEXT</span><span class="case-arrow">↗</span></div>
-          <div class="case-body">
-            <div class="case-tag t" data-zh="下一阶段" data-ja="次のフェーズ"></div>
-            <h3 class="t" data-zh="以现金流为基础推进持续扩张" data-ja="キャッシュフローを基盤に持続拡張"></h3>
-            <p class="t" data-zh="贸易业务支撑资产配置，资产收益反哺业务扩张，咨询板块提供新增长点，形成互相支撑的多元结构。" data-ja="貿易が資産投資を支え、資産収益が事業拡張を支え、相談事業が新たな成長軸となる相互補完型の構造です。"></p>
+          <div class="bullet-list">
+            <div class="bullet" data-i18n="medical_b1">2025 年医疗咨询收入约 131 万日元，2026 年目标是恢复增长。</div>
+            <div class="bullet" data-i18n="medical_b2">重点能力是中日医疗沟通、病情梳理与诊疗意见解读。</div>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="section wrap reveal" id="services">
+    <section class="wrap" id="members">
       <div class="section-head">
         <div>
-          <div class="section-kicker">What We Do Best</div>
-          <h2 class="section-title t" data-zh="我们的核心能力。" data-ja="私たちの強み。"></h2>
-        </div>
-        <div class="section-lead t" data-zh="这里也不是老式表格，我改成更接近参考站的能力模块：短标题、强节奏、可悬浮交互。" data-ja="ここも旧来の表形式ではなく、参考サイトに近いテンポ感のある能力モジュールにしています。"></div>
-      </div>
-      <div class="services">
-        <article class="service reveal"><small>01</small><h4 class="t" data-zh="跨境商品运营" data-ja="越境商品運営"></h4><p class="t" data-zh="围绕选品、供给、渠道与周转效率，建立稳定的商品输出能力。" data-ja="選定・供給・販路・回転効率を軸に、安定した商品供給体制を構築します。"></p></article>
-        <article class="service reveal"><small>02</small><h4 class="t" data-zh="资产整修与管理" data-ja="資産改修と管理"></h4><p class="t" data-zh="从老旧房产获取、整修、出租到后续维护，形成可复制的管理闭环。" data-ja="老朽物件の取得・改修・賃貸・保守まで、一貫した運営サイクルを実現します。"></p></article>
-        <article class="service reveal"><small>03</small><h4 class="t" data-zh="日本医疗信息咨询" data-ja="日本医療情報コンサル"></h4><p class="t" data-zh="帮助中国客户更高效理解日本医疗资源与服务内容。" data-ja="中国顧客が日本の医療資源とサービスを理解しやすい形で案内します。"></p></article>
-      </div>
-    </section>
-
-    <section class="section wrap reveal">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">Highlights</div>
-          <h2 class="section-title t" data-zh="业务数字与经营概况。" data-ja="事業数値と経営概要。"></h2>
+          <small>Team Profiles</small>
+          <h2 data-i18n="members_title">业务负责人</h2>
         </div>
       </div>
-      <div class="about" id="about">
-        <div class="about-copy reveal">
-          <p class="t" data-zh="公司依法在日本设立，目前以贸易收入、不动产租金及医疗咨询作为主要收入来源。公司无银行借贷、无不良资产，资金结构清晰。" data-ja="当社は日本で適法に設立され、現在は貿易収入・不動産賃料・医療相談を主な収益源としています。銀行借入や不良資産はなく、資金構造は明確です。"></p>
-          <p class="t" data-zh="下一决算期计划推进债转股，将注册资本提升至 3000 万日元，进一步增强财务基础与外部信用。" data-ja="次回決算期にはデット・エクイティ・スワップを進め、資本金を3,000万円へ引き上げ、財務基盤と対外信用をさらに強化する予定です。"></p>
-        </div>
-        <div class="about-metrics reveal">
-          <div class="metric-grid">
-            <div class="metric"><strong>936万</strong><span class="t" data-zh="2025 年出口额（日元）" data-ja="2025年 輸出売上高（円）"></span></div>
-            <div class="metric"><strong>529万</strong><span class="t" data-zh="2025 年租金收入（日元）" data-ja="2025年 家賃収入（円）"></span></div>
-            <div class="metric"><strong>3000万</strong><span class="t" data-zh="计划增资后资本金（日元）" data-ja="増資後予定資本金（円）"></span></div>
-            <div class="metric"><strong>3</strong><span class="t" data-zh="核心业务板块" data-ja="主要事業セクター"></span></div>
+      <div class="members">
+        <article class="member-card member-xq">
+          <div class="member-copy">
+            <small>Medical Consulting</small>
+            <div class="member-relates" data-i18n="xq_related">对应业务：日本医疗信息咨询与资源对接</div>
+            <h3 data-i18n="xq_name">徐倩文</h3>
+            <div class="member-role" data-i18n="xq_role">医学硕士｜血液科主治医师｜医学经理</div>
+            <p data-i18n="xq_desc_1">毕业于郑州大学医学院，从事临床医疗工作 10 余年，曾任职于中国医学科学院血液病医院／血液学研究所。2026 年起长期居住日本，熟悉日本医疗体系及前沿医药技术。</p>
+            <p data-i18n="xq_desc_2">她负责福美的医疗咨询方向，可面向有意了解日本医疗发展或寻求日本医疗服务的客户，提供更专业的咨询支持与中日医疗沟通能力。</p>
+            <div class="tag-row">
+              <span class="tag" data-i18n="xq_tag_1">中日医疗沟通</span>
+              <span class="tag" data-i18n="xq_tag_2">血液科背景</span>
+              <span class="tag" data-i18n="xq_tag_3">医学信息解读</span>
+            </div>
+            <a class="member-link" href="xuqianwen.html" data-i18n="xq_link">查看徐倩文详情页</a>
           </div>
-        </div>
+        </article>
+        <article class="member-card member-ly">
+          <div class="member-copy">
+            <small>Anime Goods & Card Export</small>
+            <div class="member-relates" data-i18n="ly_related">对应业务：动漫周边与卡牌商品出口</div>
+            <h3 data-i18n="ly_name">李屹冉</h3>
+            <div class="member-role" data-i18n="ly_role">集换式卡牌传播者｜动漫周边与卡牌商品出口方向</div>
+            <p data-i18n="ly_desc_1">毕业于神户电子专门学校 3DCG 相关专业，长期关注动漫周边、集换式卡牌与相关消费市场，适合承担卡牌商品出口与内容传播的前端展示角色。</p>
+            <p data-i18n="ly_desc_2">结合现有资料，李屹冉对应的定位已经明确为“动漫周边与卡牌商品出口方向”，可围绕卡牌商品采购、选品、市场趋势与爱好者沟通提供支持。</p>
+            <div class="tag-row">
+              <span class="tag" data-i18n="ly_tag_1">动漫周边出口</span>
+              <span class="tag" data-i18n="ly_tag_2">集换式卡牌</span>
+              <span class="tag" data-i18n="ly_tag_3">中日网店</span>
+            </div>
+            <a class="member-link" href="liyiran.html" data-i18n="ly_link">查看李屹冉详情页</a>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="section wrap reveal">
+    <section class="wrap" id="story">
       <div class="section-head">
         <div>
-          <div class="section-kicker">Common Questions</div>
-          <h2 class="section-title t" data-zh="常见问题。" data-ja="よくあるご質問。"></h2>
+          <small>Development Story</small>
+          <h2 data-i18n="story_title">接下来的推进重点</h2>
         </div>
       </div>
-      <div class="faq">
-        <div class="faq-item active">
-          <button class="faq-q" type="button"><span class="t" data-zh="你们主要做哪些业务？" data-ja="主な事業内容は何ですか？"></span><span class="faq-icon">＋</span></button>
-          <div class="faq-a" style="max-height:180px"><p class="t" data-zh="目前主要围绕出口贸易、不动产投资管理、医疗咨询三大板块展开，并以贸易现金流支撑资产扩张与新业务恢复。" data-ja="現在は輸出貿易、不動産投資管理、医療コンサルティングの3事業を中心に展開し、貿易のキャッシュフローで資産拡張と新規成長を支えています。"></p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span class="t" data-zh="你们更偏贸易公司还是投资公司？" data-ja="貿易会社ですか、それとも投資会社ですか？"></span><span class="faq-icon">＋</span></button>
-          <div class="faq-a"><p class="t" data-zh="两者兼有。贸易业务是高周转现金流来源，不动产是稳定收益与资产沉淀，医疗咨询则是新增增长方向。" data-ja="両方の側面があります。貿易は高回転のキャッシュフロー源、不動産は安定収益と資産蓄積、医療相談は新たな成長分野です。"></p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button"><span class="t" data-zh="是否可以查看更正式的报告材料？" data-ja="より正式な報告資料はありますか？"></span><span class="faq-icon">＋</span></button>
-          <div class="faq-a"><p class="t" data-zh="可以。网站已保留年度报告入口，你可以提供给客户、合作方或行政审查场景使用。" data-ja="はい。年次報告ページを用意しており、取引先・提携先・行政審査向け資料として利用できます。"></p></div>
-        </div>
+      <div class="story-grid">
+        <article class="story-card">
+          <small>Trade</small>
+          <h3 data-i18n="story_1_title">做大贸易规模</h3>
+          <p data-i18n="story_1_desc">继续优化采购渠道与库存周转效率，稳定出口额增长，并同步推进日本国内销售与网店运营。</p>
+        </article>
+        <article class="story-card">
+          <small>Offline</small>
+          <h3 data-i18n="story_2_title">筹备实体店</h3>
+          <p data-i18n="story_2_desc">在日本国内贸易持续推进的基础上，为 2027 年前后的线下实体店规划做准备。</p>
+        </article>
+        <article class="story-card">
+          <small>Medical</small>
+          <h3 data-i18n="story_3_title">恢复医疗咨询增长</h3>
+          <p data-i18n="story_3_desc">依托徐倩文的专业背景，把医疗咨询从业务说明升级为真正可承接的服务板块。</p>
+        </article>
+        <article class="story-card">
+          <small>Capital</small>
+          <h3 data-i18n="story_4_title">优化资本结构</h3>
+          <p data-i18n="story_4_desc">在下一决算期推进债转股，将注册资本金提升至 3000 万日元，增强财务稳定性。</p>
+        </article>
       </div>
     </section>
 
-    <section class="section wrap reveal" id="contact">
+    <section class="wrap" id="contact">
+      <div class="section-head">
+        <div>
+          <small>Contact</small>
+          <h2 data-i18n="contact_title">联系福美</h2>
+        </div>
+      </div>
       <div class="contact">
-        <div class="cta-panel">
-          <div class="section-kicker">Contact</div>
-          <h2 class="t" data-zh="让我们一起建立更长期的合作。" data-ja="長期的な協力関係を築きましょう。"></h2>
-          <p class="t" data-zh="如果你希望了解公司业务、合作可能性，或需要正式材料用于对外说明，可以通过下方方式联系我们。" data-ja="事業内容や協業の可能性、あるいは対外説明のための正式資料が必要な場合は、以下よりご連絡ください。"></p>
-          <div class="hero-cta">
-            <a href="mailto:contact@fukumi.co.jp" class="btn btn-primary">contact@fukumi.co.jp</a>
+        <article class="contact-card">
+          <h3 data-i18n="contact_box_title">联系福美</h3>
+          <div class="hero-actions">
+            <button class="btn btn-primary copy-email-btn" type="button" data-email="contact@fukumi.co.jp">contact@fukumi.co.jp</button>
+            <a class="btn btn-light" href="report.html" data-i18n="contact_btn_report">查看年度报告</a>
           </div>
-        </div>
-        <aside class="contact-card">
-          <div class="info-row"><small>Company</small><div>福美株式会社 / FUKUMI CO., LTD.</div></div>
-          <div class="info-row"><small class="t" data-zh="代表" data-ja="代表者"></small><div class="t" data-zh="代表取缔役 朱麗燕" data-ja="代表取締役 朱麗燕"></div></div>
-          <div class="info-row"><small>Email</small><div>contact@fukumi.co.jp</div></div>
-          <div class="info-row"><small>Tel</small><div>+81-00-0000-0000</div></div>
-          <div class="info-row"><small class="t" data-zh="地址" data-ja="住所"></small><div class="t" data-zh="日本（详细地址待更新）" data-ja="日本（詳細住所は後日更新）"></div></div>
-          <div class="qr-box">
-            <img src="qr-contact.svg" alt="qr">
-            <p class="t" data-zh="扫码联系
-可用于快速建立初步沟通。" data-ja="QRコードでご連絡ください。
-初回のやり取りをスムーズに始められます。"></p>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <small>Company</small>
+              <div data-i18n="contact_company">福美株式会社 / FUKUMI CO., LTD.</div>
+            </div>
+            <div class="contact-item">
+              <small data-i18n="contact_rep_label">Representative</small>
+              <div data-i18n="contact_rep">代表取缔役：朱麗燕</div>
+            </div>
+            <div class="contact-item">
+              <small>Address</small>
+              <div data-i18n="contact_address">神户市中央区东川崎町 5-6-10-102</div>
+            </div>
+            <div class="contact-item">
+              <small data-i18n="contact_profiles_label">Profile Pages</small>
+              <div data-i18n-html="contact_profiles"> <a href="xuqianwen.html">徐倩文详情页</a><br><a href="liyiran.html">李屹冉详情页</a></div>
+            </div>
           </div>
-        </aside>
+          <div class="map-wrap">
+            <iframe title="Google Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%E7%A5%9E%E6%88%B7%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E4%B8%9C%E5%B7%9D%E5%B4%8E%E7%94%BA%205-6-10-102&z=16&output=embed"></iframe>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer class="footer wrap">
-    <div class="footer-row">
-      <span>© 2026 FUKUMI CO., LTD.</span>
-      <span class="t" data-zh="日本合法注册企业" data-ja="日本国内適法設立会社"></span>
-    </div>
-  </footer>
+  <footer class="footer wrap" data-i18n="footer_text">© 2026 FUKUMI CO., LTD.</footer>
+  <div class="copy-toast" id="copy-toast">已复制</div>
 
   <script>
     (function(){
-      var KEY='fukumi-lang';
-      var root=document.documentElement;
-      var nodes=document.querySelectorAll('.t');
-      var btns=document.querySelectorAll('.lang-btn');
-      function setText(el, lang){
-        var val=el.getAttribute('data-'+lang);
-        if(val!=null) el.textContent=val;
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var topbar = document.querySelector('.topbar');
+      var revealTargets = document.querySelectorAll('.section-head, .metric, .business-card, .member-card, .story-card, .contact-card');
+      var copyBtn = document.querySelector('.copy-email-btn');
+      var toast = document.getElementById('copy-toast');
+      var toastTimer = null;
+      var dict = {
+        zh: {
+          page_title: '福美株式会社 | 企业官网',
+          brand_name: '福美株式会社',
+          brand_sub: '日本多元经营与长期资产布局',
+          nav_business: '核心业务',
+          nav_members: '业务负责人',
+          nav_story: '发展重点',
+          nav_report: '年度报告',
+          hero_title: '在日本，把贸易、资产与专业服务做成长期事业。',
+          hero_lead: '福美株式会社围绕出口贸易、不动产投资管理与医疗咨询三条主线经营，对外展示以业务结构、负责人和真实经营场景为核心。',
+          hero_btn_members: '查看业务负责人',
+          hero_btn_report: '阅读年度报告',
+          hero_btn_contact: '联系福美',
+          focus_label: '2026 Focus',
+          focus_title: '三条业务线<br>同时走深',
+          focus_1: '动漫周边与卡牌商品出口继续扩规模，并强化中日双侧线上销售展示。',
+          focus_2: '老旧住宅翻新与出租保持稳定租金收益，支撑长期资产配置。',
+          focus_3: '徐倩文加入后，医疗咨询板块开始具备真正的专业承接能力。',
+          position_title: '公司概览',
+          position_desc: '',
+          statement_1: '福美株式会社当前围绕贸易、不动产与医疗咨询三条业务线持续经营。',
+          statement_2: '公司以日本本地经营为基础，面向中日两侧客户持续推进商品流通、资产管理与专业咨询服务。',
+          statement_quote: '在日本，建立可持续经营的多元业务结构。',
+          metric_1: '2025 年出口贸易额，贸易仍是当前经营主引擎。',
+          metric_2: '2025 年租金收入，不动产业务继续稳定增长。',
+          metric_3: '2025 年医疗咨询收入，2026 年重点是恢复增长。',
+          metric_4: '计划增资后注册资本金，用于进一步增强信用基础。',
+          business_title: '三项主营业务',
+          business_desc: '',
+          trade_title: '动漫周边与卡牌商品出口',
+          trade_desc: '以动漫周边、宝可梦卡片与集换式卡牌相关商品为重点，持续推进出口与中日双侧线上销售。',
+          trade_owner: '对应负责人：<strong>李屹冉</strong>',
+          trade_b1: '2025 年出口额约 936 万日元，贸易业务是当前现金流核心。',
+          trade_b2: '李屹冉的加入，让卡牌方向的展示、沟通与市场表达更加具体。',
+          estate_title: '老旧住宅再生与出租管理',
+          estate_desc: '聚焦日本老旧住宅整修、翻新与出租管理，形成稳定租金收益。',
+          estate_owner: '当前由<strong>福美团队自主运营</strong>',
+          estate_b1: '2025 年租金收入约 529 万日元，高于上一年度约 449 万日元。',
+          estate_b2: '通过自主运营降低维护成本，增强长期收益稳定性。',
+          medical_title: '日本医疗信息咨询与资源对接',
+          medical_desc: '面向中国客户提供日本医疗信息咨询、资源对接与诊疗信息解读支持。',
+          medical_owner: '对应负责人：<strong>徐倩文</strong>',
+          medical_b1: '2025 年医疗咨询收入约 131 万日元，2026 年目标是恢复增长。',
+          medical_b2: '重点能力是中日医疗沟通、病情梳理与诊疗意见解读。',
+          members_title: '业务负责人',
+          members_desc: '',
+          xq_related: '对应业务：日本医疗信息咨询与资源对接',
+          xq_name: '徐倩文',
+          xq_role: '医学硕士｜血液科主治医师｜医学经理',
+          xq_desc_1: '毕业于郑州大学医学院，从事临床医疗工作 10 余年，曾任职于中国医学科学院血液病医院／血液学研究所。2026 年起长期居住日本，熟悉日本医疗体系及前沿医药技术。',
+          xq_desc_2: '她负责福美的医疗咨询方向，可面向有意了解日本医疗发展或寻求日本医疗服务的客户，提供更专业的咨询支持与中日医疗沟通能力。',
+          xq_tag_1: '中日医疗沟通',
+          xq_tag_2: '血液科背景',
+          xq_tag_3: '医学信息解读',
+          xq_link: '查看徐倩文详情页',
+          ly_name: '李屹冉',
+          ly_related: '对应业务：动漫周边与卡牌商品出口',
+          ly_role: '集换式卡牌传播者｜动漫周边与卡牌商品出口方向',
+          ly_desc_1: '毕业于神户电子专门学校 3DCG 相关专业，长期关注动漫周边、集换式卡牌与相关消费市场，适合承担卡牌商品出口与内容传播的前端展示角色。',
+          ly_desc_2: '结合现有资料，李屹冉对应的定位已经明确为“动漫周边与卡牌商品出口方向”，可围绕卡牌商品采购、选品、市场趋势与爱好者沟通提供支持。',
+          ly_tag_1: '动漫周边出口',
+          ly_tag_2: '集换式卡牌',
+          ly_tag_3: '中日网店',
+          ly_link: '查看李屹冉详情页',
+          story_title: '接下来的推进重点',
+          story_desc: '',
+          story_1_title: '做大贸易规模',
+          story_1_desc: '继续优化采购渠道与库存周转效率，稳定出口额增长，并同步推进日本国内销售与网店运营。',
+          story_2_title: '筹备实体店',
+          story_2_desc: '在日本国内贸易持续推进的基础上，为 2027 年前后的线下实体店规划做准备。',
+          story_3_title: '恢复医疗咨询增长',
+          story_3_desc: '依托徐倩文的专业背景，把医疗咨询从业务说明升级为真正可承接的服务板块。',
+          story_4_title: '优化资本结构',
+          story_4_desc: '在下一决算期推进债转股，将注册资本金提升至 3000 万日元，增强财务稳定性。',
+          contact_title: '联系福美',
+          contact_desc: '',
+          contact_box_title: '联系福美',
+          contact_box_desc: '',
+          contact_btn_report: '查看年度报告',
+          copy_done: '已复制到剪贴板',
+          contact_company: '福美株式会社 / FUKUMI CO., LTD.',
+          contact_rep_label: 'Representative',
+          contact_rep: '代表取缔役：朱麗燕',
+          contact_address: '神户市中央区东川崎町 5-6-10-102',
+          contact_profiles_label: 'Profile Pages',
+          contact_profiles: '<a href="xuqianwen.html">徐倩文详情页</a><br><a href="liyiran.html">李屹冉详情页</a>',
+          footer_text: '© 2026 FUKUMI CO., LTD.'
+        },
+        ja: {
+          page_title: '福美株式会社 | コーポレートサイト',
+          brand_name: '福美株式会社',
+          brand_sub: '日本における多角経営と長期資産配置',
+          nav_business: '事業内容',
+          nav_members: '責任者紹介',
+          nav_story: '今後の重点',
+          nav_report: '年度報告',
+          hero_title: '日本で、貿易・資産・専門サービスを長期事業として育てる。',
+          hero_lead: '福美株式会社は、輸出貿易、不動産投資管理、医療コンサルティングの3本柱で事業を展開し、外部向けには事業構造と責任者を簡潔に示します。',
+          hero_btn_members: '責任者を見る',
+          hero_btn_report: '年度報告を見る',
+          hero_btn_contact: 'お問い合わせ',
+          focus_label: '2026 Focus',
+          focus_title: '3つの事業軸を<br>同時に深める',
+          focus_1: 'アニメ周辺商品とカード商品の輸出を拡大し、中日双方のオンライン販売の見せ方も強化する。',
+          focus_2: '老朽住宅の再生と賃貸で安定収益を維持し、長期資産配置を支える。',
+          focus_3: '徐倩文の参画により、医療コンサルティングは実務対応可能な専門領域へ進んでいる。',
+          position_title: '会社概要',
+          position_desc: '',
+          statement_1: '福美株式会社は貿易、不動産、医療相談の3事業線を軸に継続運営しています。',
+          statement_2: '日本での現地経営を基盤に、日中双方の顧客へ商品流通、資産管理、専門相談サービスを展開しています。',
+          statement_quote: '日本で持続可能な多角事業構造を築く。',
+          metric_1: '2025年の輸出売上。現在の経営の主エンジン。',
+          metric_2: '2025年の賃料収入。不動産事業は引き続き安定成長。',
+          metric_3: '2025年の医療相談売上。2026年の重点は回復成長。',
+          metric_4: '増資後の予定資本金。信用基盤をさらに強化する。',
+          business_title: '3つの主要事業',
+          business_desc: '',
+          trade_title: 'アニメ周辺商品・カード商品の輸出',
+          trade_desc: 'アニメ周辺商品、ポケモンカード、トレーディングカード関連商品を中心に、輸出と日中両側のオンライン販売を進めています。',
+          trade_owner: '対応責任者：<strong>李屹冉</strong>',
+          trade_b1: '2025年の輸出額は約936万日元で、貿易事業は現在の主要なキャッシュフロー源です。',
+          trade_b2: '李屹冉の参画により、カード分野の表現、対話、マーケット訴求がより具体的になりました。',
+          estate_title: '老朽住宅再生と賃貸管理',
+          estate_desc: '日本の老朽住宅の整備、改修、賃貸管理に注力し、安定した家賃収益を形成しています。',
+          estate_owner: '現在は<strong>福美チームによる自主管理</strong>',
+          estate_b1: '2025年の賃料収入は約529万日元で、前年度約449万日元を上回りました。',
+          estate_b2: '自主管理によって維持コストを抑え、長期収益の安定性を高めています。',
+          medical_title: '日本医療情報コンサルティングと連携支援',
+          medical_desc: '中国の顧客向けに、日本医療情報相談、リソース連携、診療情報解釈支援を提供します。',
+          medical_owner: '対応責任者：<strong>徐倩文</strong>',
+          medical_b1: '2025年の医療相談売上は約131万日元。2026年の目標は回復成長です。',
+          medical_b2: '中日医療コミュニケーション、病状整理、診療意見の解釈が主な強みです。',
+          members_title: '事業責任者',
+          members_desc: '',
+          xq_related: '対応事業：日本医療情報コンサルティングと連携支援',
+          xq_name: '徐倩文',
+          xq_role: '医学修士｜血液科主治医師｜メディカルマネージャー',
+          xq_desc_1: '鄭州大学医学院卒業。10年以上の臨床経験を持ち、中国医学科学院血液病医院／血液学研究所での勤務歴があります。2026年から日本に長期滞在し、日本の医療制度と先端医療技術に精通しています。',
+          xq_desc_2: '福美では医療コンサルティング領域を担当し、日本医療への理解を深めたい顧客や医療サービスを求める顧客に対し、より専門的な相談支援と中日医療コミュニケーションを提供します。',
+          xq_tag_1: '中日医療コミュニケーション',
+          xq_tag_2: '血液科背景',
+          xq_tag_3: '医療情報解釈',
+          xq_link: '徐倩文の詳細を見る',
+          ly_name: '李屹冉',
+          ly_related: '対応事業：アニメ周辺商品・カード商品の輸出',
+          ly_role: 'トレーディングカード発信者｜アニメ周辺商品・カード輸出担当',
+          ly_desc_1: '神戸電子専門学校で3DCG関連を学び、アニメ周辺商品やトレーディングカード市場を長く追ってきました。カード商品の輸出や発信面で前面に立てる人材です。',
+          ly_desc_2: '現有資料を踏まえると、李屹冉の位置付けは「アニメ周辺商品・カード商品の輸出担当」として明確です。商品調達、選定、市場動向、愛好者とのコミュニケーションを支えられます。',
+          ly_tag_1: 'アニメ周辺商品輸出',
+          ly_tag_2: 'トレーディングカード',
+          ly_tag_3: '中日オンライン店舗',
+          ly_link: '李屹冉の詳細を見る',
+          story_title: 'これからの重点',
+          story_desc: '',
+          story_1_title: '貿易規模を拡大',
+          story_1_desc: '調達ルートと在庫回転を最適化し、輸出成長を維持しつつ、日本国内販売とオンライン運営も進めます。',
+          story_2_title: '実店舗の準備',
+          story_2_desc: '日本国内貿易を継続しながら、2027年前後の実店舗計画に備えます。',
+          story_3_title: '医療相談の回復成長',
+          story_3_desc: '徐倩文の専門性を活かし、医療相談を説明用の業務から実際に受けられるサービスへ引き上げます。',
+          story_4_title: '資本構造の最適化',
+          story_4_desc: '次回決算期にデット・エクイティ化を進め、資本金を3000万日元まで引き上げ、財務安定性を強化します。',
+          contact_title: 'お問い合わせ',
+          contact_desc: '',
+          contact_box_title: 'お問い合わせ',
+          contact_box_desc: '',
+          contact_btn_report: '年度報告を見る',
+          copy_done: 'メールアドレスをコピーしました',
+          contact_company: '福美株式会社 / FUKUMI CO., LTD.',
+          contact_rep_label: '代表者',
+          contact_rep: '代表取締役：朱麗燕',
+          contact_address: '神戸市中央区東川崎町 5-6-10-102',
+          contact_profiles_label: 'プロフィールページ',
+          contact_profiles: '<a href="xuqianwen.html">徐倩文 詳細ページ</a><br><a href="liyiran.html">李屹冉 詳細ページ</a>',
+          footer_text: '© 2026 FUKUMI CO., LTD.'
+        }
+      };
+      function applyLang(lang){
+        lang = lang === 'ja' ? 'ja' : 'zh';
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang === 'ja' ? 'ja' : 'zh-CN';
+        document.title = dict[lang].page_title;
+        document.querySelectorAll('[data-i18n]').forEach(function(el){
+          var key = el.getAttribute('data-i18n');
+          if (dict[lang][key] != null) el.innerHTML = dict[lang][key];
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+          var key = el.getAttribute('data-i18n-html');
+          if (dict[lang][key] != null) el.innerHTML = dict[lang][key];
+        });
+        try{ localStorage.setItem('fukumi-lang', lang); }catch(e){}
       }
-      function apply(lang){
-        lang=lang==='ja'?'ja':'zh';
-        root.setAttribute('data-lang',lang);
-        root.lang=lang==='ja'?'ja':'zh-CN';
-        nodes.forEach(function(n){setText(n,lang)});
-        document.title=lang==='ja'?'福美株式会社 | ブランドサイト':'福美株式会社 | 品牌官网';
-        try{localStorage.setItem(KEY,lang)}catch(e){}
+      function showToast(text){
+        if (!toast) return;
+        toast.textContent = text;
+        toast.classList.add('is-visible');
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(function(){
+          toast.classList.remove('is-visible');
+        }, 1700);
       }
-      btns.forEach(function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-l'))})});
-      try{apply(localStorage.getItem(KEY)||'zh')}catch(e){apply('zh')}
-
-      var io=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if(entry.isIntersecting){entry.target.classList.add('is-visible');}
-        })
-      },{threshold:.12});
-      document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-
-      document.querySelectorAll('.faq-item').forEach(function(item){
-        var btn=item.querySelector('.faq-q');
-        var ans=item.querySelector('.faq-a');
-        btn.addEventListener('click',function(){
-          var open=item.classList.contains('active');
-          document.querySelectorAll('.faq-item').forEach(function(it){
-            it.classList.remove('active');
-            it.querySelector('.faq-a').style.maxHeight='0px';
-          });
-          if(!open){
-            item.classList.add('active');
-            ans.style.maxHeight=ans.scrollHeight+'px';
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function(){
+          var lang = document.documentElement.getAttribute('data-lang') || 'zh';
+          var email = copyBtn.getAttribute('data-email') || copyBtn.textContent.trim();
+          var done = function(){
+            showToast((dict[lang] && dict[lang].copy_done) || '已复制');
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(done).catch(function(){
+              var input = document.createElement('input');
+              input.value = email;
+              document.body.appendChild(input);
+              input.select();
+              try { document.execCommand('copy'); } catch (e) {}
+              document.body.removeChild(input);
+              done();
+            });
+            return;
           }
-        })
+          var input = document.createElement('input');
+          input.value = email;
+          document.body.appendChild(input);
+          input.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(input);
+          done();
+        });
+      }
+      document.querySelectorAll('.lang-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang-btn')); });
       });
+      var saved = 'zh';
+      try{ saved = localStorage.getItem('fukumi-lang') || 'zh'; }catch(e){}
+
+      function setScrolled(){
+        if (!topbar) return;
+        topbar.classList.toggle('is-scrolled', window.scrollY > 18);
+      }
+      function animateCount(el){
+        if (!el || el.dataset.counted === 'true') return;
+        var text = (el.textContent || '').trim();
+        var match = text.match(/\d+/);
+        if (!match) return;
+        var target = parseInt(match[0], 10);
+        if (!target) return;
+        var suffix = text.slice(match.index + match[0].length);
+        var prefix = text.slice(0, match.index);
+        el.dataset.counted = 'true';
+        if (reduced) { el.textContent = prefix + target + suffix; return; }
+        var start = performance.now();
+        var duration = 1400;
+        function frame(now){
+          var p = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+      if (!reduced && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            if (entry.target.classList.contains('metric')) animateCount(entry.target.querySelector('strong'));
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+        revealTargets.forEach(function(el){ io.observe(el); });
+      } else {
+        revealTargets.forEach(function(el){
+          el.classList.add('is-visible');
+          if (el.classList.contains('metric')) animateCount(el.querySelector('strong'));
+        });
+      }
+      if (!reduced) {
+        window.addEventListener('mousemove', function(e){
+          var x = (e.clientX / window.innerWidth - 0.5) * 24;
+          var y = (e.clientY / window.innerHeight - 0.5) * 24;
+          document.body.style.setProperty('--orb-x', x + 'px');
+          document.body.style.setProperty('--orb-y', y + 'px');
+        }, { passive: true });
+      }
+      window.addEventListener('scroll', setScrolled, { passive: true });
+      setScrolled();
+      applyLang(saved);
+      requestAnimationFrame(function(){ document.body.classList.add('ready'); });
     })();
   </script>
 </body>

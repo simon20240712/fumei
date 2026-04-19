@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>徐倩文 | 福美株式会社</title>
+  <style>
+    :root{
+      --bg:#f5eee6;
+      --paper:#fffaf5;
+      --line:rgba(83,56,33,.12);
+      --text:#241912;
+      --muted:#6d5c4d;
+      --brand:#ad7333;
+      --brand-deep:#8a541f;
+      --shadow:0 26px 60px rgba(66,43,20,.12);
+      --radius:28px;
+      --max:1260px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:"PingFang SC","Microsoft YaHei UI","Noto Sans SC",sans-serif;
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,255,.9), transparent 24%),
+        radial-gradient(circle at 100% 12%, rgba(173,115,51,.16), transparent 20%),
+        linear-gradient(180deg, #fbf7f2 0%, #f2e7da 52%, #eadccc 100%);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      right:-10vw;
+      top:-6vh;
+      width:36vw;
+      height:36vw;
+      background:radial-gradient(circle, rgba(173,115,51,.18), transparent 62%);
+      filter:blur(16px);
+      transform:translate3d(var(--orb-x,0),var(--orb-y,0),0);
+      transition:transform .5s ease-out;
+      pointer-events:none;
+      z-index:0;
+    }
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .topbar,.hero,.wrap,.footer{position:relative;z-index:1}
+    .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto}
+    .topbar{
+      position:sticky;top:0;z-index:30;
+      backdrop-filter:blur(18px);
+      background:rgba(251,247,242,.82);
+      border-bottom:1px solid rgba(83,56,33,.08);
+      transition:background .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+    .topbar.is-scrolled{
+      background:rgba(251,247,242,.94);
+      box-shadow:0 10px 30px rgba(60,34,15,.08);
+      border-bottom-color:rgba(83,56,33,.16);
+    }
+    .nav{
+      min-height:88px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .nav-left,.nav-right{display:flex;align-items:center;gap:10px}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand-mark{
+      width:60px;height:60px;border-radius:18px;border:1px solid var(--line);
+      background:rgba(255,255,255,.9);padding:4px;object-fit:contain;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+    }
+    .brand-copy strong{display:block;font-size:18px;letter-spacing:.06em}
+    .brand-copy span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+    .nav a,.lang-btn,.copy-email-btn{
+      height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line);
+      display:inline-flex;align-items:center;background:rgba(255,255,255,.72);
+      color:var(--muted);font-size:13px;cursor:pointer;font-family:inherit;
+      transition:transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+    }
+    .nav a:hover,.lang-btn:hover,.copy-email-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 22px rgba(60,34,15,.08);
+      border-color:rgba(173,115,51,.24);
+    }
+    html[data-lang="zh"] .lang-btn[data-lang-btn="zh"],
+    html[data-lang="ja"] .lang-btn[data-lang-btn="ja"]{
+      background:linear-gradient(135deg,var(--brand),var(--brand-deep));
+      color:#fff;border-color:transparent;
+    }
+    .hero{padding:34px 0 18px}
+    .hero-box,.section-box,.fact,.gallery-card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,249,243,.68));
+      box-shadow:var(--shadow);
+    }
+    .hero-box{
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:minmax(0,1.02fr) 360px;
+      gap:0;
+      opacity:0;transform:translateY(32px);
+    }
+    .hero-copy{padding:34px}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 14px;border-radius:999px;border:1px solid var(--line);
+      color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+      background:rgba(255,255,255,.72);
+    }
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand)}
+    h1,h2,h3{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif}
+    h1{margin:18px 0 10px;font-size:clamp(42px,7vw,82px);line-height:.94;letter-spacing:-.05em}
+    .role{margin:0 0 14px;color:var(--muted);font-size:18px;line-height:1.8}
+    .hero-copy p,.section-box p{margin:0 0 14px;color:var(--muted);line-height:1.95;font-size:16px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+    .copy-email-btn{background:linear-gradient(135deg,var(--brand),var(--brand-deep));color:#fff;border-color:transparent}
+    .hero-visual{min-height:100%;background:#efe1d3}
+    .hero-visual img{width:100%;height:100%;object-fit:cover}
+    .section-box,.gallery-card{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, border-color .3s ease}
+    .section-box{padding:24px;margin-top:18px}
+    .section-box small{display:block;margin-bottom:10px;color:var(--brand);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+    .section-box h2{margin:0 0 12px;font-size:clamp(28px,4vw,52px);line-height:.98;letter-spacing:-.05em}
+    .content-grid{display:grid;grid-template-columns:minmax(0,1.06fr) 300px;gap:18px}
+    .facts{display:grid;gap:12px}
+    .fact{padding:18px;opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, border-color .3s ease}
+    .fact strong{display:block;margin-bottom:8px;font-size:16px}
+    .fact span{color:var(--muted);line-height:1.85;font-size:14px}
+    .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .tag{
+      padding:8px 12px;border-radius:999px;border:1px solid var(--line);
+      background:rgba(255,255,255,.78);font-size:13px;color:var(--muted);
+    }
+    .gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .gallery-card{padding:16px}
+    .gallery-card img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:20px}
+    .gallery-card p{margin:12px 0 0;color:var(--muted);line-height:1.8;font-size:14px}
+    .copy-toast{
+      position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);
+      padding:12px 18px;border-radius:999px;background:rgba(32,21,15,.92);color:#fff;
+      font-size:13px;line-height:1;box-shadow:0 18px 40px rgba(0,0,0,.22);
+      opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease;z-index:60;
+    }
+    .copy-toast.is-visible{opacity:1;transform:translate(-50%,0)}
+    .is-visible{opacity:1;transform:none}
+    .section-box:hover,.fact:hover,.gallery-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 32px 72px rgba(66,43,20,.14);
+      border-color:rgba(173,115,51,.18);
+    }
+    body.ready .hero-box{opacity:1;transform:none;transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1)}
+    .footer{padding:0 0 42px;color:var(--muted);font-size:12px;letter-spacing:.08em}
+    @media (max-width:1080px){
+      .hero-box,.content-grid{grid-template-columns:1fr}
+      .hero-visual{min-height:420px}
+    }
+    @media (max-width:760px){
+      .nav{padding:10px 0}
+      .brand-mark{width:54px;height:54px}
+      .brand-copy strong{font-size:17px}
+      .brand-copy span{font-size:13px}
+      .hero-copy,.section-box{padding:22px}
+      .gallery-grid{grid-template-columns:1fr}
+      .hero-actions{flex-direction:column}
+      .hero-actions > *{width:100%;justify-content:center}
+    }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none !important;transition:none !important}
+      body::before{display:none}
+      .hero-box,.section-box,.fact,.gallery-card{opacity:1 !important;transform:none !important}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="nav-left">
+        <a class="brand" href="index.html">
+          <img class="brand-mark" src="logo.jpg" alt="福美株式会社">
+          <span class="brand-copy">
+            <strong data-i18n="brand_name">福美株式会社</strong>
+            <span data-i18n="brand_sub">业务负责人详情页</span>
+          </span>
+        </a>
+      </div>
+      <div class="nav-right">
+        <a href="index.html" data-i18n="back_home">返回首页</a>
+        <a href="report.html" data-i18n="annual_report">年度报告</a>
+        <button class="lang-btn" type="button" data-lang-btn="zh">中文</button>
+        <button class="lang-btn" type="button" data-lang-btn="ja">日本語</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-box">
+        <article class="hero-copy">
+          <span class="eyebrow">Medical Consulting</span>
+          <h1 data-i18n="name">徐倩文</h1>
+          <div class="role" data-i18n="role">医学硕士｜血液科主治医师｜医学经理</div>
+          <p data-i18n="intro_1">徐倩文毕业于郑州大学医学院，从事临床医疗工作十余年，曾任职于中国医学科学院血液病医院 / 血液学研究所，现长期居住日本，熟悉日本医疗体系与前沿医药技术。</p>
+          <p data-i18n="intro_2">在福美，她负责日本医疗信息咨询与资源对接方向，主要承担中日医疗沟通、需求梳理、诊疗信息解释与前期咨询支持。</p>
+          <div class="tags">
+            <span class="tag" data-i18n="tag_1">中日医疗沟通</span>
+            <span class="tag" data-i18n="tag_2">血液科背景</span>
+            <span class="tag" data-i18n="tag_3">医学信息解读</span>
+            <span class="tag" data-i18n="tag_4">日本医疗咨询</span>
+          </div>
+          <div class="hero-actions">
+            <button class="copy-email-btn" type="button" data-email="xuqianwen002@gmail.com">xuqianwen002@gmail.com</button>
+          </div>
+        </article>
+        <aside class="hero-visual">
+          <img src="徐倩文/微信图片_20260419222855.jpg" alt="徐倩文">
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap section-box">
+      <small>Professional Value</small>
+      <h2 data-i18n="value_title">她能承接的核心能力</h2>
+      <div class="content-grid">
+        <article>
+          <p data-i18n="value_1">徐倩文的加入，让福美的医疗咨询板块从“可介绍”变成“可承接”。</p>
+          <p data-i18n="value_2">她同时具备临床医学背景与跨中日医疗体系的信息理解能力，能把患者需求、医疗信息和沟通流程整理得更准确。</p>
+          <p data-i18n="value_3">这使福美在对外说明日本医疗咨询业务时，不只是资源介绍，而是具备实际服务接口。</p>
+        </article>
+        <aside class="facts">
+          <div class="fact">
+            <strong data-i18n="fact_1_title">临床背景</strong>
+            <span data-i18n="fact_1_desc">十余年临床医疗工作经验，长期在专业医疗体系内任职。</span>
+          </div>
+          <div class="fact">
+            <strong data-i18n="fact_2_title">专业方向</strong>
+            <span data-i18n="fact_2_desc">血液科主治医师，同时具备医学硕士与医学经理背景。</span>
+          </div>
+          <div class="fact">
+            <strong data-i18n="fact_3_title">业务价值</strong>
+            <span data-i18n="fact_3_desc">提升福美在日本医疗信息咨询与中日医疗沟通方面的专业承接能力。</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap section-box">
+      <small>Photos</small>
+      <h2 data-i18n="photos_title">相关照片</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="徐倩文/微信图片_20260419222850.jpg" alt="徐倩文医疗场景照片 1">
+          <p data-i18n="photo_1">医疗场景与团队环境照片，适合用于说明其专业背景与实际工作场景。</p>
+        </div>
+        <div class="gallery-card">
+          <img src="徐倩文/微信图片_20260419222853.jpg" alt="徐倩文医疗场景照片 2">
+          <p data-i18n="photo_2">补充展示医疗从业环境，增强页面的专业感和真实感。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap" data-i18n="footer_text">© 2026 FUKUMI CO., LTD. / 徐倩文详情页</footer>
+  <div class="copy-toast" id="copy-toast">已复制</div>
+
+  <script>
+    (function(){
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var topbar = document.querySelector('.topbar');
+      var revealTargets = document.querySelectorAll('.section-box, .fact, .gallery-card');
+      var copyBtn = document.querySelector('.copy-email-btn');
+      var toast = document.getElementById('copy-toast');
+      var toastTimer = null;
+      var dict = {
+        zh: {
+          page_title:'徐倩文 | 福美株式会社',
+          brand_name:'福美株式会社',
+          brand_sub:'业务负责人详情页',
+          back_home:'返回首页',
+          annual_report:'年度报告',
+          name:'徐倩文',
+          role:'医学硕士｜血液科主治医师｜医学经理',
+          intro_1:'徐倩文毕业于郑州大学医学院，从事临床医疗工作十余年，曾任职于中国医学科学院血液病医院 / 血液学研究所，现长期居住日本，熟悉日本医疗体系与前沿医药技术。',
+          intro_2:'在福美，她负责日本医疗信息咨询与资源对接方向，主要承担中日医疗沟通、需求梳理、诊疗信息解释与前期咨询支持。',
+          tag_1:'中日医疗沟通',
+          tag_2:'血液科背景',
+          tag_3:'医学信息解读',
+          tag_4:'日本医疗咨询',
+          value_title:'她能承接的核心能力',
+          value_1:'徐倩文的加入，让福美的医疗咨询板块从“可介绍”变成“可承接”。',
+          value_2:'她同时具备临床医学背景与跨中日医疗体系的信息理解能力，能把患者需求、医疗信息和沟通流程整理得更准确。',
+          value_3:'这使福美在对外说明日本医疗咨询业务时，不只是资源介绍，而是具备实际服务接口。',
+          fact_1_title:'临床背景',
+          fact_1_desc:'十余年临床医疗工作经验，长期在专业医疗体系内任职。',
+          fact_2_title:'专业方向',
+          fact_2_desc:'血液科主治医师，同时具备医学硕士与医学经理背景。',
+          fact_3_title:'业务价值',
+          fact_3_desc:'提升福美在日本医疗信息咨询与中日医疗沟通方面的专业承接能力。',
+          photos_title:'相关照片',
+          photo_1:'医疗场景与团队环境照片，适合用于说明其专业背景与实际工作场景。',
+          photo_2:'补充展示医疗从业环境，增强页面的专业感和真实感。',
+          footer_text:'© 2026 FUKUMI CO., LTD. / 徐倩文详情页',
+          copy_done:'已复制到剪贴板'
+        },
+        ja: {
+          page_title:'徐倩文 | 福美株式会社',
+          brand_name:'福美株式会社',
+          brand_sub:'責任者詳細ページ',
+          back_home:'トップへ戻る',
+          annual_report:'年度報告',
+          name:'徐倩文',
+          role:'医学修士｜血液科主治医師｜メディカルマネージャー',
+          intro_1:'徐倩文は鄭州大学医学院を卒業し、10年以上の臨床医療経験を持ち、中国医学科学院血液病医院 / 血液学研究所での勤務歴があります。現在は日本に長期滞在し、日本の医療制度と先端医療技術に精通しています。',
+          intro_2:'福美では、日本医療情報相談と医療リソース連携を担当し、日中医療コミュニケーション、ニーズ整理、診療情報の解釈、事前相談支援を担います。',
+          tag_1:'日中医療コミュニケーション',
+          tag_2:'血液科背景',
+          tag_3:'医療情報解釈',
+          tag_4:'日本医療相談',
+          value_title:'福美にもたらす中核能力',
+          value_1:'徐倩文の参加により、福美の医療相談事業は「紹介可能」から「実際に受けられる」段階へ進みました。',
+          value_2:'臨床医学の背景と日中医療制度をまたぐ情報理解力を併せ持ち、患者ニーズと医療情報をより正確に整理できます。',
+          value_3:'これにより福美の医療相談は単なるリソース紹介ではなく、実務的なサービス窓口として機能します。',
+          fact_1_title:'臨床背景',
+          fact_1_desc:'10年以上の臨床医療経験を持ち、専門医療現場で継続して勤務。',
+          fact_2_title:'専門領域',
+          fact_2_desc:'血液科主治医師であり、医学修士とメディカルマネージャーの背景を持つ。',
+          fact_3_title:'事業価値',
+          fact_3_desc:'日本医療情報相談と日中医療コミュニケーション分野で福美の専門対応力を高める。',
+          photos_title:'関連写真',
+          photo_1:'医療現場とチーム環境を示す写真で、専門背景と実務感を伝えます。',
+          photo_2:'医療従事環境を補足的に見せ、ページの信頼感を高めます。',
+          footer_text:'© 2026 FUKUMI CO., LTD. / 徐倩文 詳細ページ',
+          copy_done:'メールアドレスをコピーしました'
+        }
+      };
+      function applyLang(lang){
+        lang = lang === 'ja' ? 'ja' : 'zh';
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang === 'ja' ? 'ja' : 'zh-CN';
+        document.title = dict[lang].page_title;
+        document.querySelectorAll('[data-i18n]').forEach(function(el){
+          var key = el.getAttribute('data-i18n');
+          if (dict[lang][key] != null) el.textContent = dict[lang][key];
+        });
+        try{ localStorage.setItem('fukumi-lang', lang); }catch(e){}
+      }
+      function setScrolled(){
+        if (!topbar) return;
+        topbar.classList.toggle('is-scrolled', window.scrollY > 18);
+      }
+      function revealOnScroll(){
+        if (reduced || !('IntersectionObserver' in window)) {
+          revealTargets.forEach(function(el){ el.classList.add('is-visible'); });
+          return;
+        }
+        var observer = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+        revealTargets.forEach(function(el){ observer.observe(el); });
+      }
+      function showToast(text){
+        if (!toast) return;
+        toast.textContent = text;
+        toast.classList.add('is-visible');
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(function(){ toast.classList.remove('is-visible'); }, 1700);
+      }
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function(){
+          var lang = document.documentElement.getAttribute('data-lang') || 'zh';
+          var email = copyBtn.getAttribute('data-email') || copyBtn.textContent.trim();
+          var done = function(){ showToast(dict[lang].copy_done); };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(done).catch(function(){
+              var input = document.createElement('input');
+              input.value = email;
+              document.body.appendChild(input);
+              input.select();
+              try { document.execCommand('copy'); } catch (e) {}
+              document.body.removeChild(input);
+              done();
+            });
+            return;
+          }
+          done();
+        });
+      }
+      document.querySelectorAll('.lang-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang-btn')); });
+      });
+      var saved = 'zh';
+      try{ saved = localStorage.getItem('fukumi-lang') || 'zh'; }catch(e){}
+      applyLang(saved);
+      window.addEventListener('scroll', setScrolled, { passive:true });
+      setScrolled();
+      revealOnScroll();
+      if (!reduced) {
+        requestAnimationFrame(function(){ document.body.classList.add('ready'); });
+        window.addEventListener('pointermove', function(e){
+          var x = (e.clientX / window.innerWidth - 0.5) * 16;
+          var y = (e.clientY / window.innerHeight - 0.5) * 14;
+          document.body.style.setProperty('--orb-x', x + 'px');
+          document.body.style.setProperty('--orb-y', y + 'px');
+        }, { passive:true });
+      } else {
+        document.body.classList.add('ready');
+      }
+    })();
+  </script>
+</body>
+</html>
