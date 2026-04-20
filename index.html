@@ -96,7 +96,7 @@
       box-shadow:var(--shadow);
       background:
         linear-gradient(115deg, rgba(24,16,12,.68), rgba(52,32,18,.42)),
-        url("https://bkimg.cdn.bcebos.com/pic/500fd9f9d72a6059252d5268996d239b033b5bb50c35") center/cover no-repeat;
+        url("hero-kobe.jpg") center/cover no-repeat;
       position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) 360px;align-items:end;
     }
     .hero-shell::before{
@@ -198,7 +198,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(90deg, rgba(251,247,241,.96) 0%, rgba(251,247,241,.9) 42%, rgba(251,247,241,.74) 72%, rgba(251,247,241,.52) 100%);
+      background:linear-gradient(90deg, rgba(251,247,241,.84) 0%, rgba(251,247,241,.66) 36%, rgba(251,247,241,.34) 66%, rgba(251,247,241,.1) 100%);
       z-index:-1;
     }
     .member-card::after{
@@ -207,11 +207,11 @@
       inset:0;
       background-size:cover;
       background-position:center;
-      opacity:.18;
+      opacity:.46;
       z-index:-2;
       transform:scale(1.02);
       transition:transform 1s cubic-bezier(.2,.7,.2,1), opacity .45s ease, filter .45s ease;
-      filter:saturate(.92) contrast(1.02);
+      filter:saturate(1.08) contrast(1.14) brightness(1.01);
     }
     .member-copy{padding:26px}
     .member-relates{
@@ -241,9 +241,9 @@
     .member-link{margin-top:16px;display:inline-flex;align-items:center;gap:8px;color:var(--brand);font-size:14px;font-weight:600}
     .member-link::after{content:"→";transition:transform .24s ease}
     .member-card:hover .member-link::after{transform:translateX(3px)}
-    .member-card:hover::after{transform:scale(1.06);opacity:.23;filter:saturate(1.04)}
+    .member-card:hover::after{transform:scale(1.06);opacity:.54;filter:saturate(1.12) contrast(1.16) brightness(1.02)}
     .member-card.member-xq::after{background-image:url("徐倩文/微信图片_20260419222850.jpg")}
-    .member-card.member-ly::after{background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tradescardsyugioh.jpg")}
+    .member-card.member-ly::after{background-image:url("tradescardsyugioh.jpg");background-position:66% center;opacity:.38}
     .story-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
     .story-card{padding:22px;min-height:220px}
     .contact{display:grid;grid-template-columns:1fr;gap:18px}
@@ -369,7 +369,7 @@
     <section class="hero wrap">
       <div class="hero-shell">
         <div class="hero-copy">
-          <span class="eyebrow">FUKUMI CO., LTD.</span>
+          <span class="eyebrow">福美株式会社</span>
           <h1 data-i18n="hero_title">在日本，把贸易、资产与专业服务做成长期事业。</h1>
           <p class="hero-lead" data-i18n="hero_lead">福美株式会社围绕出口贸易、不动产投资管理与医疗咨询三条主线经营，对外展示以业务结构、负责人和真实经营场景为核心。</p>
           <div class="hero-actions">
