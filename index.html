@@ -16,7 +16,7 @@
       --shadow:0 28px 70px rgba(60,34,15,.12);
       --radius-xl:34px;
       --radius-lg:24px;
-      --max:1280px;
+      --max:1400px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -47,7 +47,7 @@
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
     main,.topbar,.footer{position:relative;z-index:1}
-    .wrap{width:min(var(--max),calc(100% - 28px));margin:0 auto}
+    .wrap{width:min(var(--max),calc(100% - clamp(16px,3vw,40px)));margin:0 auto}
     .topbar{
       position:sticky;top:0;z-index:30;
       backdrop-filter:blur(18px);
@@ -90,14 +90,14 @@
       color:#fff;border-color:transparent;
     }
 
-    .hero{padding:28px 0 24px}
+    .hero{padding:22px 0 30px}
     .hero-shell{
-      min-height:760px;border-radius:42px;overflow:hidden;border:1px solid rgba(78,55,34,.08);
+      min-height:720px;border-radius:42px;overflow:hidden;border:1px solid rgba(78,55,34,.08);
       box-shadow:var(--shadow);
       background:
         linear-gradient(115deg, rgba(24,16,12,.68), rgba(52,32,18,.42)),
         url("hero-kobe.jpg") center/cover no-repeat;
-      position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) 360px;align-items:end;
+      position:relative;display:grid;grid-template-columns:minmax(0,1fr) 336px;align-items:stretch;
     }
     .hero-shell::before{
       content:"";position:absolute;inset:0;
@@ -107,19 +107,64 @@
         linear-gradient(90deg, rgba(18,12,10,.62) 0%, rgba(18,12,10,.36) 52%, rgba(18,12,10,.18) 100%);
     }
     .hero-copy,.hero-panel{position:relative;z-index:1}
-    .hero-copy{padding:58px 52px 54px;color:#f9f4ee;max-width:860px}
+    .hero-copy{
+      padding:52px 48px 46px;
+      color:#f9f4ee;
+      max-width:none;
+      display:grid;
+      grid-template-columns:minmax(0,560px);
+      grid-template-areas:
+        "eyebrow"
+        "title"
+        "lead"
+        "actions";
+      row-gap:0;
+      align-items:start;
+      align-self:start;
+    }
     .eyebrow{
+      grid-area:eyebrow;
       display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;
       border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);
       color:rgba(255,245,235,.86);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
     }
     .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:#f2c083;box-shadow:0 0 18px rgba(242,192,131,.7)}
     h1,h2,h3,.metric strong,.hero-panel strong{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif}
-    h1{margin:24px 0 18px;font-size:clamp(48px,8vw,102px);line-height:.92;letter-spacing:-.05em;max-width:8ch;font-weight:700}
-    .hero-lead{margin:0;max-width:700px;color:rgba(250,244,237,.82);font-size:17px;line-height:2}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    h1{
+      grid-area:title;
+      margin:10px 0 0;
+      display:block;
+      max-width:none;
+      align-self:start;
+      justify-self:start;
+      text-shadow:0 8px 24px rgba(0,0,0,.22);
+    }
+    .hero-title-line{
+      display:block;
+      font-size:clamp(42px,5.6vw,74px);
+      line-height:1.04;
+      letter-spacing:-.04em;
+      font-weight:700;
+    }
+    .hero-title-line + .hero-title-line{margin-top:6px}
+    .hero-lead{
+      grid-area:lead;
+      margin:14px 0 0;
+      max-width:34rem;
+      color:rgba(250,244,237,.92);
+      font-size:15px;
+      line-height:1.9;
+      padding:0;
+      border:none;
+      background:none;
+      backdrop-filter:none;
+      box-shadow:none;
+      text-shadow:0 3px 16px rgba(0,0,0,.32);
+      align-self:start;
+    }
+    .hero-actions{grid-area:actions;display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;align-self:start}
     .btn{
-      min-height:54px;padding:0 22px;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+      min-height:50px;padding:0 20px;border-radius:999px;border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.08);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px;
       transition:transform .28s ease, box-shadow .28s ease, background .28s ease, border-color .28s ease;
       cursor:pointer;font-family:inherit;appearance:none;
@@ -128,9 +173,10 @@
     .btn-primary{background:linear-gradient(135deg,var(--brand-2),var(--brand));border-color:transparent}
     .btn-light{background:rgba(255,255,255,.14)}
     .hero-panel{
-      padding:22px;margin:0 26px 26px 0;border-radius:28px;
+      padding:20px;margin:0 22px 22px 0;border-radius:28px;
       background:linear-gradient(180deg, rgba(252,248,244,.88), rgba(249,241,232,.68));
       border:1px solid rgba(255,255,255,.26);box-shadow:0 24px 50px rgba(25,16,10,.18);color:var(--text);backdrop-filter:blur(12px);
+      align-self:end;
     }
     .hero-panel small{display:block;color:var(--muted);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
     .hero-panel strong{display:block;font-size:38px;line-height:1.04;letter-spacing:-.05em;margin-bottom:18px}
@@ -141,22 +187,22 @@
     .hero-chip:nth-child(3){animation-delay:.08s}
     .hero-chip:nth-child(4){animation-delay:.16s}
 
-    section{padding:28px 0}
+    section{padding:38px 0}
     .section-head{
-      display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:20px;
+      display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:22px;
       opacity:0;transform:translateY(34px);transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1);
     }
     .section-head small{color:var(--muted);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
     .section-head h2{margin:6px 0 0;font-size:clamp(34px,5vw,62px);line-height:.95;letter-spacing:-.05em}
     .section-head p{max-width:560px;margin:0;color:var(--muted);line-height:1.9}
-    .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    .intro-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
     .statement,.numbers,.business-card,.member-card,.story-card,.contact-card{
       border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,252,248,.84), rgba(255,248,240,.68));
       border-radius:var(--radius-xl);box-shadow:var(--shadow);
     }
-    .statement{padding:30px;min-height:360px;background:linear-gradient(180deg, rgba(255,252,248,.96), rgba(255,246,237,.76)), radial-gradient(circle at 85% 15%, rgba(196,142,87,.16), transparent 22%)}
-    .statement p{margin:0 0 18px;color:var(--muted);font-size:16px;line-height:1.95;max-width:44em}
-    .statement .quote{padding-top:16px;border-top:1px solid rgba(78,55,34,.08);font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:28px;line-height:1.45;letter-spacing:-.03em;color:var(--text)}
+    .statement{padding:36px 36px;min-height:320px;background:linear-gradient(180deg, rgba(255,252,248,.96), rgba(255,246,237,.76)), radial-gradient(circle at 85% 15%, rgba(196,142,87,.16), transparent 22%)}
+    .statement p{margin:0 0 18px;color:var(--muted);font-size:16px;line-height:1.95;max-width:56em}
+    .statement .quote{padding-top:18px;border-top:1px solid rgba(78,55,34,.08);font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:24px;line-height:1.55;letter-spacing:-.03em;color:var(--text)}
     .numbers{padding:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-content:start}
     .metric{
       padding:20px;border-radius:22px;border:1px solid rgba(78,55,34,.08);background:rgba(255,255,255,.62);
@@ -164,11 +210,11 @@
     }
     .metric strong{display:block;font-size:clamp(34px,4vw,58px);line-height:1;letter-spacing:-.06em;margin-bottom:10px}
     .metric span{display:block;color:var(--muted);line-height:1.75;font-size:14px}
-    .business-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .business-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
     .business-card,.member-card,.story-card,.contact-card{
       opacity:0;transform:translateY(34px);transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease;will-change:transform,opacity;
     }
-    .business-card{min-height:320px;padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+    .business-card{min-height:348px;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
     .business-card small,.member-card small,.story-card small{display:block;color:var(--brand);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
     .business-card h3,.member-card h3,.story-card h3{margin:0 0 12px;font-size:30px;line-height:1.08;letter-spacing:-.04em}
     .business-card p,.member-copy p,.story-card p,.contact-card p{margin:0 0 12px;color:var(--muted);line-height:1.9;font-size:15px}
@@ -244,8 +290,12 @@
     .member-card:hover::after{transform:scale(1.06);opacity:.54;filter:saturate(1.12) contrast(1.16) brightness(1.02)}
     .member-card.member-xq::after{background-image:url("徐倩文/微信图片_20260419222850.jpg")}
     .member-card.member-ly::after{background-image:url("tradescardsyugioh.jpg");background-position:66% center;opacity:.38}
-    .story-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-    .story-card{padding:22px;min-height:220px}
+    .story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .story-card{
+      padding:26px;
+      min-height:240px;
+      background:linear-gradient(180deg, rgba(255,253,250,.96), rgba(255,247,239,.74));
+    }
     .contact{display:grid;grid-template-columns:1fr;gap:18px}
     .contact-card{padding:28px}
     .contact-card h3{margin:0 0 14px;font-size:36px;letter-spacing:-.04em}
@@ -304,7 +354,8 @@
       .hero-shell,.intro-grid{grid-template-columns:1fr}
       .hero-shell{min-height:unset}
       .hero-panel{margin:0 24px 24px 24px}
-      .business-grid,.story-grid{grid-template-columns:1fr 1fr}
+      .business-grid{grid-template-columns:1fr 1fr}
+      .story-grid{grid-template-columns:1fr}
     }
     @media (max-width:760px){
       .nav{padding:10px 0}
@@ -312,13 +363,35 @@
       .brand-copy strong{font-size:17px}
       .brand-copy span{font-size:13px}
       .nav-links{display:none}
-      .hero-copy{padding:28px 24px 22px}
+      .hero-copy{
+        padding:28px 24px 22px;
+        grid-template-columns:1fr;
+        grid-template-areas:
+          "eyebrow"
+          "title"
+          "lead"
+          "actions";
+      }
       .hero-shell{border-radius:28px}
       .hero-panel{margin:0 16px 16px 16px}
       .hero-panel strong{font-size:30px}
       .section-head h2{font-size:clamp(28px,9vw,44px)}
       .hero-actions{flex-direction:column}
       .btn{width:100%}
+      h1{
+        margin-top:10px;
+      }
+      .hero-title-line{
+        font-size:clamp(30px,10vw,48px);
+        line-height:1.08;
+      }
+      .hero-lead{
+        margin-top:12px;
+        font-size:15px;
+        line-height:1.9;
+        padding:0;
+        max-width:none;
+      }
       .business-grid,.story-grid,.contact-grid,.numbers{grid-template-columns:1fr}
       .member-copy{padding:22px}
       .member-card{min-height:auto}
@@ -331,6 +404,8 @@
       }
       .map-wrap iframe{height:280px}
       .wrap{width:min(var(--max),calc(100% - 20px))}
+      .statement{padding:28px 22px}
+      .statement .quote{font-size:20px;line-height:1.6}
     }
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
@@ -355,7 +430,6 @@
           <a href="#business" data-i18n="nav_business">核心业务</a>
           <a href="#members" data-i18n="nav_members">业务负责人</a>
           <a href="#story" data-i18n="nav_story">发展重点</a>
-          <a href="report.html" data-i18n="nav_report">年度报告</a>
         </nav>
         <div class="lang-switch">
           <button class="lang-btn" type="button" data-lang-btn="zh">中文</button>
@@ -370,11 +444,10 @@
       <div class="hero-shell">
         <div class="hero-copy">
           <span class="eyebrow">福美株式会社</span>
-          <h1 data-i18n="hero_title">在日本，把贸易、资产与专业服务做成长期事业。</h1>
+          <h1 data-i18n="hero_title"><span class="hero-title-line">在日本，把贸易、资产与</span><span class="hero-title-line">专业服务做成长期事业。</span></h1>
           <p class="hero-lead" data-i18n="hero_lead">福美株式会社围绕出口贸易、不动产投资管理与医疗咨询三条主线经营，对外展示以业务结构、负责人和真实经营场景为核心。</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#members" data-i18n="hero_btn_members">查看业务负责人</a>
-            <a class="btn btn-light" href="report.html" data-i18n="hero_btn_report">阅读年度报告</a>
             <a class="btn btn-light" href="#contact" data-i18n="hero_btn_contact">联系福美</a>
           </div>
         </div>
@@ -399,26 +472,8 @@
         <article class="statement">
           <p data-i18n="statement_1">福美株式会社当前围绕贸易、不动产与医疗咨询三条业务线持续经营。</p>
           <p data-i18n="statement_2">公司以日本本地经营为基础，面向中日两侧客户持续推进商品流通、资产管理与专业咨询服务。</p>
-          <div class="quote" data-i18n="statement_quote">在日本，建立可持续经营的多元业务结构。</div>
+          <div class="quote" data-i18n="statement_quote">以日本本地经营与长期投入为基础，逐步形成兼顾现金流、资产沉淀与专业服务能力的多元业务结构，为公司后续扩展预留更稳健的经营空间。</div>
         </article>
-        <aside class="numbers">
-          <div class="metric">
-            <strong>936万</strong>
-            <span data-i18n="metric_1">2025 年出口贸易额，贸易仍是当前经营主引擎。</span>
-          </div>
-          <div class="metric">
-            <strong>529万</strong>
-            <span data-i18n="metric_2">2025 年租金收入，不动产业务继续稳定增长。</span>
-          </div>
-          <div class="metric">
-            <strong>131万</strong>
-            <span data-i18n="metric_3">2025 年医疗咨询收入，2026 年重点是恢复增长。</span>
-          </div>
-          <div class="metric">
-            <strong>3000万</strong>
-            <span data-i18n="metric_4">计划增资后注册资本金，用于进一步增强信用基础。</span>
-          </div>
-        </aside>
       </div>
     </section>
 
@@ -447,11 +502,11 @@
             <small>02 / Real Estate</small>
             <h3 data-i18n="estate_title">老旧住宅再生与出租管理</h3>
             <p data-i18n="estate_desc">聚焦日本长期空置的一户建住宅，通过整修、翻新、清洁维护和设备修缮提升出租价值，形成稳定租金收益，并持续扩大可复制的不动产管理能力。</p>
-            <div class="owner-line" data-i18n-html="estate_owner">当前由<strong>福美团队自主运营</strong></div>
+            <div class="owner-line" data-i18n-html="estate_owner">对应负责人：<strong>朱麗燕</strong></div>
           </div>
           <div class="bullet-list">
             <div class="bullet" data-i18n="estate_b1">2025 年租金收入约 529 万日元，高于上一年度约 449 万日元。</div>
-            <div class="bullet" data-i18n="estate_b2">通过自主运营降低维护成本，增强长期收益稳定性。</div>
+            <div class="bullet" data-i18n="estate_b2">通过持续维护与运营优化，提升资产使用效率，增强长期收益稳定性。</div>
           </div>
         </article>
         <article class="business-card">
@@ -522,23 +577,18 @@
       <div class="story-grid">
         <article class="story-card">
           <small>Trade</small>
-          <h3 data-i18n="story_1_title">做大贸易规模</h3>
-          <p data-i18n="story_1_desc">继续优化采购渠道与库存周转效率，稳定出口额增长，并同步推进日本国内销售与网店运营。</p>
+          <h3 data-i18n="story_1_title">扩大贸易规模与销售效率</h3>
+          <p data-i18n="story_1_desc">围绕重点品类持续优化选品、采购、库存周转与出货节奏，在稳定出口增长的同时，进一步打通日本国内销售与线上网店运营，提升整体转化效率与现金流质量。</p>
         </article>
         <article class="story-card">
           <small>Offline</small>
-          <h3 data-i18n="story_2_title">筹备实体店</h3>
-          <p data-i18n="story_2_desc">在日本国内贸易持续推进的基础上，为 2027 年前后的线下实体店规划做准备。</p>
+          <h3 data-i18n="story_2_title">推进线下实体店筹备</h3>
+          <p data-i18n="story_2_desc">在日本国内贸易与本地销售持续推进的基础上，逐步验证选址、选品结构、线下展示方式与日常运营模型，为 2027 年前后的实体店落地做好前期准备。</p>
         </article>
         <article class="story-card">
           <small>Medical</small>
-          <h3 data-i18n="story_3_title">恢复医疗咨询增长</h3>
-          <p data-i18n="story_3_desc">依托徐倩文的专业背景，把医疗咨询从业务说明升级为真正可承接的服务板块。</p>
-        </article>
-        <article class="story-card">
-          <small>Capital</small>
-          <h3 data-i18n="story_4_title">优化资本结构</h3>
-          <p data-i18n="story_4_desc">在下一决算期推进债转股，将注册资本金提升至 3000 万日元，增强财务稳定性。</p>
+          <h3 data-i18n="story_3_title">恢复医疗咨询板块增长</h3>
+          <p data-i18n="story_3_desc">依托徐倩文的专业背景与中日沟通能力，进一步完善咨询流程、服务说明与客户承接方式，把医疗咨询从说明型业务升级为稳定可交付的专业服务板块。</p>
         </article>
       </div>
     </section>
@@ -555,7 +605,6 @@
           <h3 data-i18n="contact_box_title">联系福美</h3>
           <div class="hero-actions">
             <button class="btn btn-primary copy-email-btn" type="button" data-email="contact@fukumi.co.jp">contact@fukumi.co.jp</button>
-            <a class="btn btn-light" href="report.html" data-i18n="contact_btn_report">查看年度报告</a>
           </div>
           <div class="contact-grid">
             <div class="contact-item">
@@ -602,11 +651,9 @@
           nav_business: '核心业务',
           nav_members: '业务负责人',
           nav_story: '发展重点',
-          nav_report: '年度报告',
-          hero_title: '在日本，把贸易、资产与专业服务做成长期事业。',
+          hero_title: '<span class="hero-title-line">在日本，把贸易、资产与</span><span class="hero-title-line">专业服务做成长期事业。</span>',
           hero_lead: '福美株式会社围绕出口贸易、不动产投资管理与医疗咨询三条主线经营，对外展示以业务结构、负责人和真实经营场景为核心。',
           hero_btn_members: '查看业务负责人',
-          hero_btn_report: '阅读年度报告',
           hero_btn_contact: '联系福美',
           focus_label: '2026 Focus',
           focus_title: '三条业务线<br>同时走深',
@@ -617,11 +664,15 @@
           position_desc: '',
           statement_1: '福美株式会社当前围绕贸易、不动产与医疗咨询三条业务线持续经营。',
           statement_2: '公司以日本本地经营为基础，面向中日两侧客户持续推进商品流通、资产管理与专业咨询服务。',
-          statement_quote: '在日本，建立可持续经营的多元业务结构。',
-          metric_1: '2025 年出口贸易额，贸易仍是当前经营主引擎。',
-          metric_2: '2025 年租金收入，不动产业务继续稳定增长。',
-          metric_3: '2025 年医疗咨询收入，2026 年重点是恢复增长。',
-          metric_4: '计划增资后注册资本金，用于进一步增强信用基础。',
+          statement_quote: '以日本本地经营与长期投入为基础，逐步形成兼顾现金流、资产沉淀与专业服务能力的多元业务结构，为公司后续扩展预留更稳健的经营空间。',
+          metric_1_title: '贸易业务持续推进',
+          metric_1: '围绕动漫周边、卡牌商品等重点品类，持续推进选品、采购、出口与销售节奏，保持稳定的业务转化能力。',
+          metric_2_title: '不动产业务稳健运营',
+          metric_2: '通过住宅整修、出租管理与日常维护，持续沉淀日本本地资产管理经验，形成更稳定的经营支撑。',
+          metric_3_title: '医疗咨询专业承接',
+          metric_3: '依托专业背景与跨境沟通能力，面向有日本医疗信息咨询需求的客户，提供更具针对性的咨询与对接服务。',
+          metric_4_title: '在日经营基础持续强化',
+          metric_4: '围绕合规经营、客户响应、合作网络与日常运营能力建设，逐步夯实可持续发展的多元经营底盘。',
           business_title: '三项主营业务',
           business_desc: '',
           trade_title: '动漫周边与卡牌商品出口',
@@ -631,9 +682,9 @@
           trade_b2: '李屹冉的加入，让卡牌方向的展示、沟通与市场表达更加具体。',
           estate_title: '老旧住宅再生与出租管理',
           estate_desc: '聚焦日本老旧住宅整修、翻新与出租管理，形成稳定租金收益。',
-          estate_owner: '当前由<strong>福美团队自主运营</strong>',
+          estate_owner: '对应负责人：<strong>朱麗燕</strong>',
           estate_b1: '2025 年租金收入约 529 万日元，高于上一年度约 449 万日元。',
-          estate_b2: '通过自主运营降低维护成本，增强长期收益稳定性。',
+          estate_b2: '通过持续维护与运营优化，提升资产使用效率，增强长期收益稳定性。',
           medical_title: '日本医疗信息咨询与资源对接',
           medical_desc: '面向中国客户提供日本医疗信息咨询、资源对接与诊疗信息解读支持。',
           medical_owner: '对应负责人：<strong>徐倩文</strong>',
@@ -661,19 +712,16 @@
           ly_link: '查看李屹冉详情页',
           story_title: '接下来的推进重点',
           story_desc: '',
-          story_1_title: '做大贸易规模',
-          story_1_desc: '继续优化采购渠道与库存周转效率，稳定出口额增长，并同步推进日本国内销售与网店运营。',
-          story_2_title: '筹备实体店',
-          story_2_desc: '在日本国内贸易持续推进的基础上，为 2027 年前后的线下实体店规划做准备。',
-          story_3_title: '恢复医疗咨询增长',
-          story_3_desc: '依托徐倩文的专业背景，把医疗咨询从业务说明升级为真正可承接的服务板块。',
-          story_4_title: '优化资本结构',
-          story_4_desc: '在下一决算期推进债转股，将注册资本金提升至 3000 万日元，增强财务稳定性。',
+          story_1_title: '扩大贸易规模与销售效率',
+          story_1_desc: '围绕重点品类持续优化选品、采购、库存周转与出货节奏，在稳定出口增长的同时，进一步打通日本国内销售与线上网店运营，提升整体转化效率与现金流质量。',
+          story_2_title: '推进线下实体店筹备',
+          story_2_desc: '在日本国内贸易与本地销售持续推进的基础上，逐步验证选址、选品结构、线下展示方式与日常运营模型，为 2027 年前后的实体店落地做好前期准备。',
+          story_3_title: '恢复医疗咨询板块增长',
+          story_3_desc: '依托徐倩文的专业背景与中日沟通能力，进一步完善咨询流程、服务说明与客户承接方式，把医疗咨询从说明型业务升级为稳定可交付的专业服务板块。',
           contact_title: '联系福美',
           contact_desc: '',
           contact_box_title: '联系福美',
           contact_box_desc: '',
-          contact_btn_report: '查看年度报告',
           copy_done: '已复制到剪贴板',
           contact_company: '福美株式会社 / FUKUMI CO., LTD.',
           contact_rep_label: 'Representative',
@@ -690,11 +738,9 @@
           nav_business: '事業内容',
           nav_members: '責任者紹介',
           nav_story: '今後の重点',
-          nav_report: '年度報告',
-          hero_title: '日本で、貿易・資産・専門サービスを長期事業として育てる。',
+          hero_title: '<span class="hero-title-line">日本で、貿易・資産・</span><span class="hero-title-line">専門サービスを長期事業として育てる。</span>',
           hero_lead: '福美株式会社は、輸出貿易、不動産投資管理、医療コンサルティングの3本柱で事業を展開し、外部向けには事業構造と責任者を簡潔に示します。',
           hero_btn_members: '責任者を見る',
-          hero_btn_report: '年度報告を見る',
           hero_btn_contact: 'お問い合わせ',
           focus_label: '2026 Focus',
           focus_title: '3つの事業軸を<br>同時に深める',
@@ -705,11 +751,15 @@
           position_desc: '',
           statement_1: '福美株式会社は貿易、不動産、医療相談の3事業線を軸に継続運営しています。',
           statement_2: '日本での現地経営を基盤に、日中双方の顧客へ商品流通、資産管理、専門相談サービスを展開しています。',
-          statement_quote: '日本で持続可能な多角事業構造を築く。',
-          metric_1: '2025年の輸出売上。現在の経営の主エンジン。',
-          metric_2: '2025年の賃料収入。不動産事業は引き続き安定成長。',
-          metric_3: '2025年の医療相談売上。2026年の重点は回復成長。',
-          metric_4: '増資後の予定資本金。信用基盤をさらに強化する。',
+          statement_quote: '日本での実務運営と継続的な投下を土台に、キャッシュフロー、資産蓄積、専門サービス提供力を兼ね備えた多角的な事業構造を段階的に整え、今後の拡張に向けた安定した経営基盤を築いています。',
+          metric_1_title: '貿易事業を継続拡大',
+          metric_1: 'アニメ周辺商品やトレーディングカード関連を中心に、選定、仕入れ、輸出、販売の流れを着実に進め、安定した事業転換力を維持しています。',
+          metric_2_title: '不動産事業を安定運営',
+          metric_2: '住宅の整備、賃貸管理、日常保守を通じて、日本国内での資産管理ノウハウを蓄積し、より安定した経営の支えを形成しています。',
+          metric_3_title: '医療相談を専門的に対応',
+          metric_3: '専門知識と越境コミュニケーション力を活かし、日本の医療情報や相談を必要とする顧客に対して、より具体的な相談と連携支援を提供しています。',
+          metric_4_title: '日本での経営基盤を強化',
+          metric_4: 'コンプライアンス、顧客対応、協力ネットワーク、日常運営体制の整備を通じて、持続的に成長できる多角経営の土台を強化しています。',
           business_title: '3つの主要事業',
           business_desc: '',
           trade_title: 'アニメ周辺商品・カード商品の輸出',
@@ -719,9 +769,9 @@
           trade_b2: '李屹冉の参画により、カード分野の表現、対話、マーケット訴求がより具体的になりました。',
           estate_title: '老朽住宅再生と賃貸管理',
           estate_desc: '日本の老朽住宅の整備、改修、賃貸管理に注力し、安定した家賃収益を形成しています。',
-          estate_owner: '現在は<strong>福美チームによる自主管理</strong>',
+          estate_owner: '担当責任者：<strong>朱麗燕</strong>',
           estate_b1: '2025年の賃料収入は約529万日元で、前年度約449万日元を上回りました。',
-          estate_b2: '自主管理によって維持コストを抑え、長期収益の安定性を高めています。',
+          estate_b2: '継続的な保守と運営改善を通じて資産活用効率を高め、長期収益の安定性を強化しています。',
           medical_title: '日本医療情報コンサルティングと連携支援',
           medical_desc: '中国の顧客向けに、日本医療情報相談、リソース連携、診療情報解釈支援を提供します。',
           medical_owner: '対応責任者：<strong>徐倩文</strong>',
@@ -749,19 +799,16 @@
           ly_link: '李屹冉の詳細を見る',
           story_title: 'これからの重点',
           story_desc: '',
-          story_1_title: '貿易規模を拡大',
-          story_1_desc: '調達ルートと在庫回転を最適化し、輸出成長を維持しつつ、日本国内販売とオンライン運営も進めます。',
-          story_2_title: '実店舗の準備',
-          story_2_desc: '日本国内貿易を継続しながら、2027年前後の実店舗計画に備えます。',
-          story_3_title: '医療相談の回復成長',
-          story_3_desc: '徐倩文の専門性を活かし、医療相談を説明用の業務から実際に受けられるサービスへ引き上げます。',
-          story_4_title: '資本構造の最適化',
-          story_4_desc: '次回決算期にデット・エクイティ化を進め、資本金を3000万日元まで引き上げ、財務安定性を強化します。',
+          story_1_title: '貿易規模と販売効率を拡大',
+          story_1_desc: '重点カテゴリを中心に、選定、調達、在庫回転、出荷リズムを継続的に最適化し、輸出成長を安定させながら、日本国内販売とオンライン運営をさらに接続し、全体の転換効率とキャッシュフローの質を高めます。',
+          story_2_title: '実店舗準備を段階的に推進',
+          story_2_desc: '日本国内での貿易とローカル販売の継続を土台に、立地、商品構成、店頭展示、日常運営モデルを順次検証し、2027年前後の実店舗立ち上げに向けた準備を進めます。',
+          story_3_title: '医療相談事業の成長を回復',
+          story_3_desc: '徐倩文の専門性と日中コミュニケーション力を活かし、相談フロー、サービス説明、顧客受け入れ方法を整え、医療相談を説明中心の業務から安定して提供できる専門サービスへ引き上げます。',
           contact_title: 'お問い合わせ',
           contact_desc: '',
           contact_box_title: 'お問い合わせ',
           contact_box_desc: '',
-          contact_btn_report: '年度報告を見る',
           copy_done: 'メールアドレスをコピーしました',
           contact_company: '福美株式会社 / FUKUMI CO., LTD.',
           contact_rep_label: '代表者',
